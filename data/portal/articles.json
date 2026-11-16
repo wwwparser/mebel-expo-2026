@@ -1,0 +1,16 @@
+[
+  {
+    "id": "visitor-preparation",
+    "title": "Как подготовиться к посещению «МЕБЕЛЬ-2026»",
+    "summary": "Даты, часы, площадка и порядок работы с каталогом и деловой программой перед визитом.",
+    "author": "Редакция независимого навигатора",
+    "checked_at": "2026-11-16",
+    "content_file": "visitor-guide.html",
+    "sources": [
+      {"title": "Информация для посетителей МЕБЕЛЬ-2026", "url": "https://www.meb-expo.ru/ru/visitors/info/", "date": "2026-11-16"},
+      {"title": "Официальный список участников (срез на 13 ноября 2026 года)", "url": "https://www.meb-expo.ru/ru/exhibition/exhibitors/", "date": "2026-11-13"},
+      {"title": "Деловая программа МЕБЕЛЬ-2026", "url": "https://www.meb-expo.ru/ru/events/", "date": "2026-11-16"},
+      {"title": "Как проехать на выставку", "url": "https://www.meb-expo.ru/ru/visitors/route/", "date": "2026-11-16"}
+    ]
+  }
+]

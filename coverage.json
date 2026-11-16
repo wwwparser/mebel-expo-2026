@@ -1,0 +1,34 @@
+{
+  "edition": "МЕБЕЛЬ-2026",
+  "source_snapshot_date": "2026-11-13",
+  "retrieved_at": "2026-11-16T11:21:34+03:00",
+  "source_url": "https://www.meb-expo.ru/ru/exhibition/exhibitors/",
+  "source_html": "data/raw/official_catalog_2026-11-16.html",
+  "catalog_rows_found": 478,
+  "participant_rows_imported": 478,
+  "fields_imported": [
+    "name",
+    "country",
+    "stand",
+    "official-guide website",
+    "public contacts",
+    "site meta description where available"
+  ],
+  "details_checked": 164,
+  "telegram_channels_checked": 0,
+  "limitations": [
+    "The official participant list confirms only company name, country and stand. Website associations come from exact unique stand matches in the official guide; shared-stand links were excluded. Public contacts and Telegram links are shown only when found on an associated company website. Telegram preview coverage varies by channel; up to 10 recent posts were collected per preview. The agenda contains announcements and does not confirm that sessions occurred. Market research results were too noisy to support market-size claims."
+  ],
+  "website_links_from_official_guide": 284,
+  "participants_with_contacts": 184,
+  "telegram_channels_linked_from_websites": 92,
+  "telegram_public_preview_channels": 61,
+  "telegram_channels_without_public_preview": 31,
+  "telegram_posts_collected": 515,
+  "telegram_posts_reviewed": 515,
+  "telegram_posts_current_expo": 36,
+  "program_records": 26,
+  "speaker_profiles": 42,
+  "verified_digital_solutions": 2,
+  "service_candidates_for_manual_review": 5
+}

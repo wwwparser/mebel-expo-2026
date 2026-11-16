@@ -1,0 +1,36 @@
+{
+  "name": "МЕБЕЛЬ",
+  "edition": "МЕБЕЛЬ-2026",
+  "start_date": "2026-11-23",
+  "end_date": "2026-11-26",
+  "dates_label": "23–26 ноября 2026",
+  "place": "МВЦ «Крокус Экспо», павильон 3, залы 13, 14 и 15",
+  "timezone": "Europe/Moscow",
+  "base_url": "https://wwwparser.github.io/mebel-expo-2026/",
+  "official_url": "https://www.meb-expo.ru/ru/",
+  "catalog_url": "https://www.meb-expo.ru/ru/exhibition/exhibitors/",
+  "scheme_url": "https://www.meb-expo.ru/common/img/uploaded/exhibitions/mebel/doc_2026/LDM-26_sxema_07-16-3.pdf",
+  "checked_at": "2026-11-16",
+  "output_dir": "docs",
+  "modules": [
+    "participants",
+    "program",
+    "people",
+    "posts",
+    "services",
+    "articles",
+    "map"
+  ],
+  "feed_count": 10,
+  "labels": {
+    "participants": "Участники",
+    "program": "Деловая программа",
+    "people": "Спикеры",
+    "posts": "Лента Telegram",
+    "services": "Цифровые решения",
+    "articles": "Полезное перед визитом",
+    "map": "Схема павильона"
+  },
+  "intro": "Независимый навигатор по официальному каталогу, деловой программе и открытым контактам участников. Срез каталога: 13 ноября 2026.",
+  "brand_name": "МЕБЕЛЬ-2026"
+}
