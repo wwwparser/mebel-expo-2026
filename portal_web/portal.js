@@ -44,3 +44,74 @@ if (calculator) {
  calculator.addEventListener('input',calculate);
  calculate();
 }
+
+const factoryStream = document.querySelector('#factory-stream');
+if (factoryStream) {
+ const directory = new Map([...document.querySelectorAll('[data-factory]')].map(el => [el.dataset.factory, el.dataset]));
+ const controls = factoryStream.querySelector('.filters');
+ const query = controls.querySelector('input');
+ const kind = document.querySelector('#factory-kind');
+ const topic = document.querySelector('#factory-topic');
+ const count = document.querySelector('#factory-count');
+ const grid = document.querySelector('#factory-posts');
+ const more = document.querySelector('#factory-more');
+ const empty = document.querySelector('#factory-empty');
+ const dateFormat = new Intl.DateTimeFormat('ru-RU', {dateStyle:'short',timeStyle:'short',timeZone:'Europe/Moscow'});
+ let limit = 12;
+ let loading;
+ function node(tag, css, label) {
+   const el = document.createElement(tag);
+   if (css) el.className = css;
+   if (label) el.textContent = label;
+   return el;
+ }
+ function link(url, label, css) {
+   const el = node('a',css,label);
+   el.href = url;
+   return el;
+ }
+ function card(post) {
+   const brand = directory.get(post.handle);
+   const article = node('article','post');
+   const heading = node('div','post-who');
+   heading.append(link('https://t.me/'+post.handle,brand.name),node('span','tag',brand.kind));
+   article.append(heading);
+   if (post.image) {
+     const photo = node('img');
+     photo.loading='lazy'; photo.alt='Иллюстрация из канала '+brand.name; photo.src=post.image;
+     const cover = link(post.url,'','post-preview'); cover.append(photo); article.append(cover);
+   }
+   const body = node('div','post-content');
+   if (post.quote) body.append(link('#attendance','Анонс поездки','topic'));
+   body.append(node('p','',post.text || 'Фото или видео без подписи.'));
+   const footer = node('div','post-footer');
+   const when = node('time','',dateFormat.format(new Date(post.date)));
+   when.dateTime=post.date; footer.append(when, link(post.url,'Пост в Telegram ↗'));
+   body.append(footer); article.append(body);
+   return article;
+ }
+ async function refresh() {
+   try {
+     if (!loading) loading = fetch(factoryStream.dataset.source).then(r => {
+       if (!r.ok) throw new Error('feed');
+       return r.json();
+     });
+     const all = await loading;
+     const needle = searchable(query.value.trim());
+     const matches = all.filter(p => {
+       const c = directory.get(p.handle);
+       return (!kind.value || c.kind===kind.value) && (!topic.value || (topic.value==='visit' ? p.quote : p.image))
+         && (!needle || searchable([c.name,c.city,p.handle,p.text,p.quote || ''].join(' ')).includes(needle));
+     });
+     grid.replaceChildren(...matches.slice(0,limit).map(card));
+     count.textContent='Найдено: '+matches.length+'. Показано: '+Math.min(limit,matches.length)+'.';
+     more.hidden=matches.length<=limit; empty.hidden=matches.length>0;
+   } catch {
+     loading=null;
+     count.textContent='Не удалось загрузить остальные сообщения. Проверьте соединение и повторите поиск.';
+   }
+ }
+ controls.addEventListener('input',()=>{limit=12;refresh()});
+ controls.querySelector('.reset').addEventListener('click',()=>{query.value='';kind.value='';topic.value='';limit=12;refresh()});
+ more.addEventListener('click',()=>{limit+=12;refresh()});
+}

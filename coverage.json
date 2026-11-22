@@ -45,6 +45,25 @@
     "html_responses": 215,
     "pages_with_novelty_links": 36
   },
-  "business_articles": 13,
-  "promotion_cards": 11
+  "business_articles": 23,
+  "promotion_cards": 11,
+  "avito_furniture_guides": 10,
+  "factory_feed": {
+    "checked_at": "2026-11-22",
+    "channels": 1174,
+    "channels_by_type": {
+      "Магазин": 464,
+      "Фабрика": 395,
+      "Продавец": 315
+    },
+    "posts": 4170,
+    "posts_with_images": 1892,
+    "announced_visits": 9,
+    "2gis_rubric_rows_including_duplicates": 266859,
+    "2gis_candidate_handles_checked": 8059,
+    "yandex_russia_factory_rows": 11678,
+    "yandex_belarus_factory_rows": 833,
+    "yandex_site_addresses_attempted": 5647,
+    "yandex_site_addresses_with_html": 1983
+  }
 }

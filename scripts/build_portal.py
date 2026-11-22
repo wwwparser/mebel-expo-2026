@@ -384,6 +384,27 @@ def build(root=ROOT, output_override=None):
     labels.update(config.get('labels', {}))
     nav = [('index.html', 'Главная')] + [(MODULES[k][0], labels[k]) for k in MODULES if k in active]
     speaker_items, business_guides, promotions = [], [], []
+    factory_feed = read_json(root / 'data/portal/factory_feed.json', {}) if journal else {}
+    factory_channels = {}
+    factory_announced = {}
+    if factory_feed:
+        nav.append(('factories.html', 'Фабрики и магазины'))
+        for c in read_json(root / 'data/portal/factory_channels.json', []):
+            handle = c['handle'].lower()
+            if handle in factory_channels or not re.fullmatch(r'[a-z][a-z0-9_]{3,31}',handle):
+                raise ValueError('Invalid factory channel: '+handle)
+            if not safe_url(c['source_url']) or (c.get('website') and not safe_url(c['website'])):
+                raise ValueError('Invalid factory source: '+handle)
+            factory_channels[handle] = c
+        for p in factory_feed['posts']:
+            handle = p['handle']
+            if handle not in factory_channels or not re.fullmatch(r'https://t\.me/'+re.escape(handle)+r'/[0-9]+',p['url'],re.I):
+                raise ValueError('Invalid factory post: '+p['url'])
+            date_value(p['date'],tz)
+            if p['image'] and not asset(p['image'],out):
+                raise ValueError('Missing factory photo: '+p['image'])
+            if p.get('quote'):
+                factory_announced.setdefault(handle,p)
     if journal:
         nav.extend([('speaker-feed.html', 'Лента спикеров'), ('giveaways.html', 'Розыгрыши'), ('business.html', 'Карта бизнеса')])
         for social in read_json(root / 'data/portal/speaker_socials.json', []):
@@ -397,6 +418,7 @@ def build(root=ROOT, output_override=None):
             speaker_items.append(p)
         speaker_items.sort(key=lambda p: p.get('published_at') or '', reverse=True)
         business_guides = read_json(root / 'data/portal/business.json', [])
+        business_guides.extend(read_json(root / 'data/portal/avito_guides.json', []))
         promotions = read_json(root / 'data/portal/promotions.json', [])
         for guide in business_guides:
             identifier(guide['id'])
@@ -435,6 +457,12 @@ def build(root=ROOT, output_override=None):
         context['event_schema']['url'] = config['official_url']
     favicon = b'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#223b32"/><text x="32" y="45" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="42" fill="#fffdf9">M</text></svg>'
     generated = {'portal-assets/style.css': style, 'portal-assets/portal.js': script, 'favicon.svg': favicon}
+    if factory_feed:
+        name = 'portal-assets/factory-feed.json'
+        payload = json.dumps(factory_feed['posts'], ensure_ascii=False, separators=(',', ':')).encode('utf-8')
+        generated[name] = payload
+        context.update(factory_feed=factory_feed, factory_channels=factory_channels, factory_announced=factory_announced,
+                       factory_data_url=name+'?v='+digest(payload)[:16])
 
     def render(path, template, title, **extra):
         prefix = '../' * (len(PurePosixPath(path).parts) - 1)
@@ -445,6 +473,8 @@ def build(root=ROOT, output_override=None):
         generated[path] = re.sub(r'^[ \t]+$', '', html, flags=re.MULTILINE).encode('utf-8')
 
     if journal:
+        if factory_feed:
+            render('factories.html','factories.html','Лента мебельных фабрик и магазинов')
         render('speaker-feed.html', 'posts.html', 'Лента спикеров', speaker_feed=True)
         render('giveaways.html', 'promotions.html', 'Розыгрыши и акции')
         render('business.html', 'business.html', 'Карта бизнеса', guide=None)
@@ -489,6 +519,15 @@ def build(root=ROOT, output_override=None):
     for p in participants:
         writer.writerow([csv_cell(v) for v in [p['id'], p['name'], p['country'], '; '.join(p['stands']), '; '.join(s['url'] for s in p['sources'])]])
     generated['exports/participants.csv'] = output_csv.getvalue().encode('utf-8-sig')
+    if factory_channels:
+        directory_csv = io.StringIO(newline='')
+        writer = csv.writer(directory_csv, delimiter=';', lineterminator='\n')
+        writer.writerow(['Компания','Тип','Город','Канал','Сайт','Источник','Анонс поездки'])
+        for handle,c in factory_channels.items():
+            values = [c['name'],c['kind'],c['city'],'https://t.me/'+handle,c.get('website',''),
+                      c['source_url'],factory_announced.get(handle,{}).get('url','')]
+            writer.writerow([csv_cell(v or '') for v in values])
+        generated['exports/factory-channels.csv'] = directory_csv.getvalue().encode('utf-8-sig')
     # Content hashes retain lastmod and filesystem mtime across identical builds.
     manifest_path = output_file(out, '.portal-manifest.json')
     previous = read_json(manifest_path, {})

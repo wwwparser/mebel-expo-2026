@@ -236,3 +236,6 @@ details.card{margin:8px 0}summary{cursor:pointer;color:var(--accent);padding:8px
 
 .guide-cover{margin:0 0 25px}.guide-cover img{width:100%;max-height:330px;object-fit:contain;background:var(--surface);border-radius:7px}.guide-cover figcaption{font-size:13px;margin-top:4px}
 .meeting{max-width:850px}.meeting li{margin:12px 0}.offer-time{border-left:3px solid var(--accent);padding-left:10px;font-weight:700}
+
+.avito-links{display:flex;flex-wrap:wrap;gap:8px}.stream-title{margin:15px 0 10px;font-size:1.4rem}#factory-stream .filters{margin:8px 0}#factory-stream .post{min-width:0}#factory-more{display:block;margin:18px auto}#factory-more[hidden]{display:none}@media(max-width:720px){.newsnav:has(a[href='factories.html']){display:flex;flex-wrap:wrap}.newsnav:has(a[href='factories.html']) a{flex:1 1 auto;padding:7px 6px}#factory-stream .filters select{flex:1 1 120px}#factory-stream .filters input{flex-basis:100%}}
+@media(min-width:370px) and (max-width:720px){.newsnav:has(a[href="factories.html"]){display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}.newsnav:has(a[href="factories.html"]) a{padding:5px 1px;font-size:12px}}
