@@ -1,0 +1,750 @@
+[
+  {
+    "person_id": "sp-738a2409635d",
+    "name": "Дмитриев Михаил",
+    "role": "директор портала «ПроДерево»",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-50c76fbd153c",
+    "name": "Голубков Дмитрий",
+    "role": "макроэкономист, независимый инвестиционный советник",
+    "status": "confirmed",
+    "links": [
+      {
+        "label": "Telegram · GOLUBKOV Economics",
+        "url": "https://t.me/golubkov_economics",
+        "source_url": "https://golubkov-expert.ru/",
+        "evidence": "Официальный сайт Дмитрия Голубкова перечисляет Telegram в раскрытии информации; профиль канала описывает экономический блог его автора."
+      }
+    ],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-ea5754f2fd9a",
+    "name": "Липский Виталий",
+    "role": "генеральный директор ООО «Национальное лесное агентство развития и инвестиций»",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 3,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 1,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-80d6ffaa3536",
+    "name": "Тоцкий Александр",
+    "role": "заместитель генерального директора ООО «Чудово-РВС»",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-0bea9c26e447",
+    "name": "Фидаров Вадим",
+    "role": "директор по работе с органами государственной власти, член Правительственной комиссии по развитию лесного комплекса Ассоциации деревянного домостроения",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 3,
+      "successful_queries": 1,
+      "errors": 0,
+      "fallback_searches": 1,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-c2226c648f2e",
+    "name": "Зотова Марина",
+    "role": "старший консультант агентства WhatWood",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 3,
+      "successful_queries": 1,
+      "errors": 0,
+      "fallback_searches": 1,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-1cd9598b10c2",
+    "name": "Мариев Александр",
+    "role": "главный аналитик, руководитель постоянно действующей Проектной группы Рослесхоза по реализации положений Федерального закона от 4 февраля 2021 года №3-ФЗ об обороте древесины и продукции из нее, ФГБУ «Рослесинфорг»",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 3,
+      "successful_queries": 1,
+      "errors": 0,
+      "fallback_searches": 1,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-578f8ffbbff5",
+    "name": "Попов Павел",
+    "role": "начальник отдела анализа по рынкам лесоматериалов и стройматериалов Управления развития и продвижения отраслевой аналитики АО «Петербургская Биржа»",
+    "status": "organization_channel_only",
+    "links": [
+      {
+        "label": "Telegram · Петербургская Биржа (организация)",
+        "url": "https://t.me/spimexofficial",
+        "source_url": "https://t.me/s/spimexofficial?after=3219&q=%23%D0%A6%D0%B5%D0%BD%D0%BE%D0%B2%D0%BE%D0%B5%D0%90%D0%B3%D0%B5%D0%BD%D1%82%D1%81%D1%82%D0%B2%D0%BE",
+        "evidence": "Пост официального канала биржи приводит прямую цитату Павла Попова и его должность; профиль канала указывает spimex.com. Это канал биржи, не личная страница."
+      }
+    ],
+    "search_summary": {
+      "queries_attempted": 3,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 1,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-7a8196372f3b",
+    "name": "Керченский Владимир",
+    "role": "начальник отдела продаж дирекции по развитию домостроения АО «Новоторжский ЛПК»",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 3,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 1,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-8ee147ef5738",
+    "name": "Конов Кирилл",
+    "role": "коммерческий директор BN Group",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-0d182f5a4c42",
+    "name": "Абрамов Дмитрий",
+    "role": "генеральный директор ГК «Рион»",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-ef63503c2e79",
+    "name": "Федорова Светлана",
+    "role": "генеральный директор «Экспресс-Обзор»",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-5d2ab201595c",
+    "name": "Ракитова Ольга",
+    "role": "кандидат экономических наук, доцент кафедры «Экономика и финансы» Санкт-Петербургского филиала Финансового университета при Правительстве РФ, генеральный директор ООО «Инфобио»",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-ebd6695511bd",
+    "name": "Шматков Николай",
+    "role": "директор системы сертификации «Лесной эталон»",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-dd5a9627d15d",
+    "name": "Лопухин Алексей",
+    "role": "генеральный директор и основатель компании «МИР. Мебель. Инвестиции. Ритейл»",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 3,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 1,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-3dc83ffe0a79",
+    "name": "Иртуганов Тимур",
+    "role": "генеральный директор Ассоциации предприятий мебельной и деревообрабатывающей промышленности России (АМДПР)",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-5e5e9094f7f7",
+    "name": "Котлукова Светлана",
+    "role": "журналист, интерьерный маркетолог, основатель агентства «АрхДиалог», преподаватель Британской высшей школы дизайна",
+    "status": "organization_channel_only",
+    "links": [
+      {
+        "label": "Telegram · канал агентства АрхДиалог (организация)",
+        "url": "https://t.me/archdialog_friends",
+        "source_url": "https://t.me/s/archdialog_friends",
+        "evidence": "Описание канала содержит сайт archdialog.ru и представляет агентство; сообщения содержат обращения «На связи Светлана Котлукова», а профиль называет её администратором. Это канал организации, не личная страница."
+      }
+    ],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить.",
+    "organization_channel_note": "Посты канала организации не включались в speaker_posts без явного авторства или интервью спикера."
+  },
+  {
+    "person_id": "sp-f7b60889d0c3",
+    "name": "Новикова Наталья",
+    "role": "коммерческий директор Лемана ПРО",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-630e16e8e532",
+    "name": "Якубовская Ирина",
+    "role": "дизайнер интерьера",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-f3dbae8930d0",
+    "name": "Трегубов Сергей",
+    "role": "дизайнер интерьера, дважды номинант премии INTERIA AWARDS, обладатель более 30 дипломов и наград в области дизайна, основатель и владелец студий IROOM design и 1-Room",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-fe94919984a7",
+    "name": "Верховод Алексей",
+    "role": "российский дизайнер интерьера, блогер, амбассадор интерьерных брендов",
+    "status": "confirmed",
+    "links": [
+      {
+        "label": "Telegram · личный авторский канал",
+        "url": "https://t.me/averhovod",
+        "source_url": "https://alexeyverhovod.ru/",
+        "evidence": "Официальный сайт Алексея включает канал в список его официальных ресурсов; описание Telegram называет Алексея Верховода дизайнером интерьера."
+      },
+      {
+        "label": "Instagram · личный профиль",
+        "url": "https://www.instagram.com/alexeyverhovod/",
+        "source_url": "https://alexeyverhovod.ru/",
+        "evidence": "Ссылка Instagram дана на официальном сайте в списке личных официальных ресурсов."
+      },
+      {
+        "label": "ВКонтакте · группа автора",
+        "url": "https://vk.com/alexeyverhovodgroup",
+        "source_url": "https://alexeyverhovod.ru/",
+        "evidence": "Ссылка VK дана на официальном сайте Алексея в списке его официальных ресурсов."
+      },
+      {
+        "label": "YouTube · личный канал",
+        "url": "https://www.youtube.com/channel/UC4XrcTncK4fKthDIi8uzapA",
+        "source_url": "https://alexeyverhovod.ru/",
+        "evidence": "Сайт ссылается на YouTube как на официальный ресурс; канал подписан именем Алексея Верховода и описывает его дизайнерский блог."
+      }
+    ],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-1d63f52b4678",
+    "name": "Комаров Евгений",
+    "role": "исполняющий обязанности директора МФ МГТУ им. Н.Э. Баумана",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 3,
+      "successful_queries": 1,
+      "errors": 0,
+      "fallback_searches": 1,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-7db6dc1c55b0",
+    "name": "Али Венера",
+    "role": "телевизионный продюсер, производитель телепроектов «Артдизайн», «Стройка», «Умный дом», «Дачная академия»",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-fe20e3e61669",
+    "name": "Бесчастнов Алексей",
+    "role": "старший менеджер StepChange Consulting SA",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-48e17252fe93",
+    "name": "Яхья Саиди",
+    "role": "генеральный директор Al Essami (Иордания)",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-4bd1329bdece",
+    "name": "Каминский Илья",
+    "role": "начальник отдела доступа на внешние рынки и урегулирования торговых споров департамента торговой политики ЕАЭС",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-07c7157f074f",
+    "name": "Баранов Кирилл",
+    "role": "аналитик, автор проекта «Сигналы из леса»",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-230c8db58bfc",
+    "name": "Швец Владимир",
+    "role": "руководитель ООО «Макинас»",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 3,
+      "successful_queries": 1,
+      "errors": 0,
+      "fallback_searches": 1,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-a4d8a4ed0da1",
+    "name": "Сухов Олег",
+    "role": "начальник технического отдела GT",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-1afb84e49759",
+    "name": "Захаров Иван",
+    "role": "патентный поверенный РФ №2954, председатель Комитета по внедрению инноваций и технологическому развитию бизнеса при «Деловой России» Республики Татарстан",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-5c758b229cd0",
+    "name": "Зелинская Валерия",
+    "role": "управляющий партнер коммуникационного агентства FCP Media",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 3,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 1,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-ffeefa65bf50",
+    "name": "Гаглоева Мария",
+    "role": "управляющий партнер коммуникационного агентства FCP Media",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 3,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 1,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-31b665cb54f8",
+    "name": "Владыко Анастасия",
+    "role": "сооснователь и главный архитектор Проектного бюро №1, практикующий дизайнер интерьера и архитектор",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 3,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 1,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-dab6b82db440",
+    "name": "Маркова Наталья",
+    "role": "архитектор и дизайнер интерьера, сооснователь студии NM Interiors",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-e17165f8b8e5",
+    "name": "Соло Наталья",
+    "role": "дизайнер-проектировщик, участник телепроектов «Квартирный вопрос», «Дачный ответ», «Большие перемены», «Большая переделка»",
+    "status": "confirmed",
+    "links": [
+      {
+        "label": "Telegram · авторский профессиональный блог",
+        "url": "https://t.me/Planirovka_pro",
+        "source_url": "https://planirovkaplus.ru/",
+        "evidence": "Официальный сайт называет Наталью Соло руководителем студии и автором блога «Планировка Плюс», ссылка ведёт прямо на этот Telegram-канал; профиль содержит её имя."
+      }
+    ],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-b4f9a8ae9006",
+    "name": "Ширяева Светлана",
+    "role": "главный редактор журналов «Мебельщик Сибири» и «Мебельщик Юга», создатель портала «Мебельщик»",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-534a5f50b519",
+    "name": "Филяев Алексей",
+    "role": "директор по продажам компании «Базис-Центр»",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-fdc956891430",
+    "name": "Али Венера",
+    "role": "телевизионный продюсер производитель телепроектов «Артдизайн», «Стройка», «Умный дом», «Дачная академия»",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить.",
+    "same_identity_as": "sp-7db6dc1c55b0",
+    "identity_note": "Повторная запись Венеры Али в people.json: то же имя и практически идентичная биография; отдельный аккаунт для дубля не заводился."
+  },
+  {
+    "person_id": "sp-cb4b5f7d8458",
+    "name": "Гацкевич Анна",
+    "role": "дизайнер интерьера, основатель и креативный директор студии GATKEVICH",
+    "status": "not_confirmed",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-221ad5957559",
+    "name": "Преображенская Наталья",
+    "role": "дизайнер, искусствовед, владелец топовой интерьерной студии «Уютная квартира» и бюро премиальных интерьеров TREND’UP, автор книги-бестселлера «Крутая квартира» и «Сам себе декоратор»",
+    "status": "organization_channel_only",
+    "links": [
+      {
+        "label": "Telegram · канал бюро Натальи Преображенской (организация)",
+        "url": "https://t.me/ukvartira",
+        "source_url": "https://t.me/s/ukvartira",
+        "evidence": "Название канала указывает бюро Натальи Преображенской; описание подписывает блог Натальей, в свежих постах она говорит от первого лица. Это канал бюро, не отдельный личный аккаунт."
+      },
+      {
+        "label": "ВКонтакте · сообщество бюро (организация)",
+        "url": "https://vk.com/ukvartira",
+        "source_url": "https://t.me/s/ukvartira",
+        "evidence": "Ссылка VK указана в описании Telegram-канала бюро."
+      }
+    ],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-9896c48fe8f8",
+    "name": "Стефак Анастасия",
+    "role": "исполнительный директор студии TB.Design, эксперт по операционному управлению в дизайн‑бизнесе и практик масштабирования креативных компаний",
+    "status": "not_confirmed_serp_errors",
+    "links": [],
+    "search_summary": {
+      "queries_attempted": 3,
+      "successful_queries": 0,
+      "errors": 2,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  },
+  {
+    "person_id": "sp-434ad79e9ae2",
+    "name": "Крюкова Елена",
+    "role": "практикующий юрист и судебный эксперт, которая специализируется на правовом сопровождении дизайнеров интерьера, архитекторов, декораторов и предметных дизайнеров",
+    "status": "confirmed",
+    "links": [
+      {
+        "label": "Telegram · профессиональный канал Елены Крюковой",
+        "url": "https://t.me/kriukova_lawyer",
+        "source_url": "https://t.me/kriukova_lawyer",
+        "evidence": "Публичное описание называет Елену Крюкову и её практику сопровождения дизайнеров; профиль Международной школы дизайна подтверждает специализацию."
+      }
+    ],
+    "search_summary": {
+      "queries_attempted": 2,
+      "successful_queries": 2,
+      "errors": 0,
+      "fallback_searches": 0,
+      "search_log": "data/raw/speaker_search_log.json",
+      "identity_source": "https://www.meb-expo.ru/ru/events/"
+    },
+    "verification_note": "Профиль включён только при подтверждённой связке с официальным сайтом, профессиональным профилем или авторским описанием. Пустой links означает, что связь не удалось надёжно подтвердить."
+  }
+]

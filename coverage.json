@@ -15,7 +15,7 @@
     "site meta description where available"
   ],
   "details_checked": 164,
-  "telegram_channels_checked": 0,
+  "telegram_channels_checked": 92,
   "limitations": [
     "The official participant list confirms only company name, country and stand. Website associations come from exact unique stand matches in the official guide; shared-stand links were excluded. Public contacts and Telegram links are shown only when found on an associated company website. Telegram preview coverage varies by channel; up to 10 recent posts were collected per preview. The agenda contains announcements and does not confirm that sessions occurred. Market research results were too noisy to support market-size claims."
   ],
@@ -24,11 +24,27 @@
   "telegram_channels_linked_from_websites": 92,
   "telegram_public_preview_channels": 61,
   "telegram_channels_without_public_preview": 31,
-  "telegram_posts_collected": 515,
-  "telegram_posts_reviewed": 515,
-  "telegram_posts_current_expo": 36,
+  "telegram_posts_collected": 533,
+  "telegram_posts_reviewed": 533,
+  "telegram_posts_current_expo": 74,
   "program_records": 26,
   "speaker_profiles": 42,
   "verified_digital_solutions": 2,
-  "service_candidates_for_manual_review": 5
+  "service_candidates_for_manual_review": 5,
+  "journal_as_of": "2026-11-22",
+  "telegram_posts_with_media": 456,
+  "speaker_profiles_checked": 42,
+  "speaker_direct_profiles": 4,
+  "speaker_organization_only": 3,
+  "speaker_posts": 24,
+  "product_cards": 40,
+  "product_expo_announcements": 9,
+  "product_website_cards": 11,
+  "site_survey": {
+    "urls": 284,
+    "html_responses": 215,
+    "pages_with_novelty_links": 36
+  },
+  "business_articles": 13,
+  "promotion_cards": 11
 }

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}{% import 'macros.html' as m %}
+{% block body %}
+<header class="edition-head"><p class="kicker">Мебель · Обзор продуктов</p><h1>Новинки</h1><p>Что изменилось в ассортименте и что участники обещают показать на выставке.</p></header>
+{{ m.newsnav(active,nav) }}
+<details class="source-note"><summary>Как отобраны товары</summary><p>В подборку вошли товары с фотографией и описанием из Telegram или с сайта поставщика. Метка «Анонс выставки» означает, что компания или отраслевое издание прямо назвали товар и место показа. В остальных карточках можно открыть каталог и уточнить наличие у поставщика.</p></details>
+<section class="filter-scope stream" data-limit="18">
+<div class="filters"><input type="search" placeholder="Товар, бренд, стенд…" aria-label="Поиск новинок"><select data-field="kind" aria-label="Где представлено"><option value="">Все новинки</option><option>Анонс выставки</option><option>В ассортименте</option></select><button type="button" class="reset">Сбросить</button></div>
+<p class="result-count small muted" aria-live="polite"></p>
+<div class="product-grid">
+{% for x in items %}
+  {% set names=[] %}{% for pid in x.participant_ids %}{% set c=participant_map[pid] %}{% set _=names.append(c.name+' '+' '.join(c.stands)) %}{% endfor %}
+  {% set kind='Анонс выставки' if x.expo else 'В ассортименте' %}
+  <article class="product-card filter-item" data-kind="{{ kind }}" data-search="{{ (x.title+' '+x.description+' '+' '.join(names))|lower }}">
+    {% if x.image_view %}<a href="{{ x.url }}" class="product-img"><img loading="lazy" src="{{ x.image_view }}" alt="{{ x.title }}"></a>{% endif %}
+    <div><p class="kicker">{{ kind }}</p><h2>{{ x.title }}</h2><p>{{ x.description }}</p>
+      {% for id in x.participant_ids %}{% set c=participant_map[id] %}<p class="small"><a href="{{ c.page }}">{{ c.name }}</a> · {{ c.stands|join(', ') }}</p>{% endfor %}
+      <p class="small muted">{% if x.published_at %}Опубликовано {{ x.published_at|date_text }}{% else %}Проверено {{ x.checked_at|date_text }}{% endif %}</p>
+      <a href="{{ x.url }}">{{ 'Публикация в Telegram' if x.source_type=='Telegram' else 'Карточка производителя' }} ↗</a>
+      {% if x.source_type!='Telegram' and x.sources|length>1 %} · <a class="small" href="{{ x.sources[1].url }}">Подборка новинок</a>{% endif %}
+      {% if x.photo_source %} · <a class="small" href="{{ x.photo_source }}">Фото</a>{% endif %}
+    </div>
+  </article>
+{% endfor %}
+</div><p class="empty" hidden>Новинки по этим условиям не найдены.</p><button class="btn more">Показать ещё</button></section>{% endblock %}

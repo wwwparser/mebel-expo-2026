@@ -242,6 +242,7 @@ def build(root=ROOT, output_override=None):
     active = {name for name in selected if name == 'participants' or (config.get('scheme_url') if name == 'map' else (rows[name] or name == 'services'))}
     # Disabled inputs are not public and do not need to satisfy module contracts.
     rows = {name: value if name in active else [] for name, value in rows.items()}
+    journal = config.get('journal', False)
     participants = rows['participants']
     people = rows['people']
     participant_map = {p['id']: p for p in participants}
@@ -272,8 +273,9 @@ def build(root=ROOT, output_override=None):
                 item.setdefault(key, [])
             item['image_view'] = asset(item.get('logo' if name == 'participants' else 'photo'), out)
             item['screenshot_view'] = asset(item.get('screenshot'), out)
+            contacts = item.get('contacts') or item.get('links') or []
             item['links'] = []
-            for link in item.get('contacts', []):
+            for link in contacts:
                 if not isinstance(link, dict) or not link.get('label') or not link.get('value'):
                     raise ValueError(f'Invalid contact on {item["id"]}')
                 item['links'].append({**link, 'url': safe_url(link.get('url', ''), contact=True)})
@@ -313,11 +315,13 @@ def build(root=ROOT, output_override=None):
         post['people_ids'] = list(dict.fromkeys(post.get('people_ids', []) + channel.get('people_ids', [])))
         post['excerpt'] = excerpt(post.get('text', ''), 45)
         post['photos_view'] = [v for x in post.get('photos', []) if (v := asset(x, out))]
+        post['preview_kind'] = next((m.get('type') for m in post.get('media', [])
+                                     if post['photos_view'] and m.get('local_path')==post['photos_view'][0]), None)
         a = analyses.get(post['id'], {})
         kind_labels = {'giveaway': 'Розыгрыш', 'prize_contest': 'Призовой конкурс', 'gift_for_visit': 'Подарок за визит', 'discount': 'Скидка', 'other': '', 'unclear': 'Условия уточняются'}
         relevance_labels = {'current_expo': 'Текущая выставка', 'online_only': 'Онлайн', 'other_event': 'Другое событие', 'unclear': 'Связь не уточнена'}
         current = (a.get('input_hash') == input_hash and a.get('task_version') == 'expo-post-v3'
-                   and a.get('review_status') == 'verified' and a.get('classification') in kind_labels
+                   and a.get('review_status') in ('verified','reused_text') and a.get('classification') in kind_labels
                    and a.get('relevance') in relevance_labels)
         if current:
             if a.get('checked_at'):
@@ -379,8 +383,27 @@ def build(root=ROOT, output_override=None):
     labels = {key: value[1] for key, value in MODULES.items()}
     labels.update(config.get('labels', {}))
     nav = [('index.html', 'Главная')] + [(MODULES[k][0], labels[k]) for k in MODULES if k in active]
-    style = (root / 'portal_web/style.css').read_bytes()
-    script = (root / 'portal_web/portal.js').read_bytes()
+    speaker_items, business_guides, promotions = [], [], []
+    if journal:
+        nav.extend([('speaker-feed.html', 'Лента спикеров'), ('giveaways.html', 'Розыгрыши'), ('business.html', 'Карта бизнеса')])
+        for social in read_json(root / 'data/portal/speaker_socials.json', []):
+            person = person_map[social['person_id']]
+            person['socials'] = social.get('links', [])
+        for p in read_json(root / 'data/portal/speaker_posts.json', []):
+            p['people_ids'] = p['person_ids']
+            p['channel'] = {'title': p['channel_title'], 'url': p['channel_url']}
+            p['excerpt'] = excerpt(p.get('text', ''), 45)
+            p['photos_view'] = [img for x in p.get('photos', []) if (img := asset(x, out))]
+            speaker_items.append(p)
+        speaker_items.sort(key=lambda p: p.get('published_at') or '', reverse=True)
+        business_guides = read_json(root / 'data/portal/business.json', [])
+        promotions = read_json(root / 'data/portal/promotions.json', [])
+        for guide in business_guides:
+            identifier(guide['id'])
+            if set(guide['people']) - participant_map.keys():
+                raise ValueError('Unknown business guide exhibitor')
+    style = (root / 'portal_web/style.css').read_text(encoding='utf-8').encode('utf-8')
+    script = (root / 'portal_web/portal.js').read_text(encoding='utf-8').encode('utf-8')
     env = Environment(loader=FileSystemLoader(root / 'portal_web'), autoescape=select_autoescape(['html', 'xml']))
     env.filters.update(excerpt=excerpt, date_text=lambda value: date_text(value, tz), url=safe_url)
     env.tests['contains_id'] = lambda ids, value: value in ids
@@ -393,6 +416,11 @@ def build(root=ROOT, output_override=None):
                    giveaway_groups=list(giveaways.items()), rows=rows, feed_count=feed_count,
                    style_version=digest(style)[:16], script_version=digest(script)[:16],
                    dates_label=config.get('dates_label') or f'{start:%d.%m.%Y} — {end:%d.%m.%Y}')
+    context.update(speaker_items=speaker_items, business_guides=business_guides,
+                   business_groups=sorted({g['group'] for g in business_guides}),
+                   booth_draws=any(p['scope']=='На выставке' and p['kind']=='Розыгрыш' for p in promotions),
+                   promotion_sections=[(group,[p for p in promotions if p['group']==group])
+                                       for group in dict.fromkeys(p['group'] for p in promotions)])
     screening_path = root / 'data/portal/service_screening.json'
     screening = read_json(screening_path, {}) if screening_path.exists() else {}
     context['service_summary'] = screening.get('summary', {})
@@ -405,7 +433,7 @@ def build(root=ROOT, output_override=None):
         'endDate': config['end_date'], 'location': {'@type': 'Place', 'name': config['place']}}
     if config.get('official_url'):
         context['event_schema']['url'] = config['official_url']
-    favicon = b'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#9a5b2e"/><text x="32" y="45" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="42" fill="#fffdf9">M</text></svg>'
+    favicon = b'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#223b32"/><text x="32" y="45" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="42" fill="#fffdf9">M</text></svg>'
     generated = {'portal-assets/style.css': style, 'portal-assets/portal.js': script, 'favicon.svg': favicon}
 
     def render(path, template, title, **extra):
@@ -414,8 +442,14 @@ def build(root=ROOT, output_override=None):
         title = f'{title} · {event_name}'
         html = env.get_template(template).render(**context, prefix=prefix, canonical=canonical,
                                                 active=path, title=title, description=extra.pop('description', title), **extra)
-        generated[path] = html.encode('utf-8')
+        generated[path] = re.sub(r'^[ \t]+$', '', html, flags=re.MULTILINE).encode('utf-8')
 
+    if journal:
+        render('speaker-feed.html', 'posts.html', 'Лента спикеров', speaker_feed=True)
+        render('giveaways.html', 'promotions.html', 'Розыгрыши и акции')
+        render('business.html', 'business.html', 'Карта бизнеса', guide=None)
+        for guide in business_guides:
+            render(f"business/{guide['id']}.html", 'business.html', guide['title'], guide=guide)
     render('index.html', 'index.html', 'Навигатор выставки')
     render('catalog.html', 'catalog.html', labels['participants'],
            countries=sorted({p['country'] for p in participants if p['country']}),
@@ -424,11 +458,13 @@ def build(root=ROOT, output_override=None):
     for name, values in [('participants', participants), ('people', people)]:
         for item in values:
             related = [p for p in rows['posts'] if item['id'] in p.get('participant_ids' if name == 'participants' else 'people_ids', [])]
+            if name == 'people' and speaker_items:
+                related = [p for p in speaker_items if item['id'] in p['people_ids']] + related
             render(item['page'], 'profile.html', item['name'], item=item, profile_type=name, item_posts=related[:feed_count])
     for name in MODULES:
         if name not in active or name == 'participants':
             continue
-        template = 'services.html' if name == 'services' else (f'{name}.html' if name in ('people', 'program', 'posts', 'giveaways', 'articles', 'map') else 'listing.html')
+        template = 'services.html' if name == 'services' else (f'{name}.html' if name in ('people', 'program', 'posts', 'giveaways', 'articles', 'map', 'novelties') else 'listing.html')
         render(MODULES[name][0], template, labels[name], module=name, items=rows.get(name, []))
     for article in rows['articles']:
         render(article['page'], 'article.html', article['title'], item=article, description=article.get('summary') or article['title'])

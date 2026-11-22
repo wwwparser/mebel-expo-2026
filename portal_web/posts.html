@@ -1,1 +1,17 @@
-{% extends 'base.html' %}{% import 'macros.html' as m %}{% block body %}<h1>{{ labels.posts }}</h1><p class="lead">{{ posts|length }} последних публичных публикаций из {{ channel_preview_count }} каналов. В проверке были 92 публичные ссылки с сайтов участников; у {{ channel_count-channel_preview_count }} каналов веб-просмотр Telegram не показал публикации. Для доступных каналов просмотрено до 10 последних сообщений; это не вся история каналов.</p><section class="filter-scope" data-limit="{{ feed_count }}"><div class="filters"><input type="search" aria-label="Поиск публикаций" placeholder="Канал или текст…"></div><p class="result-count muted small" aria-live="polite"></p><div class="feed-grid">{% for p in posts %}{{ m.post(p,'',participant_map,person_map) }}{% endfor %}</div><p class="empty" hidden>Публикации не найдены.</p><button class="btn more">Показать ещё</button></section>{% endblock %}
+{% extends 'base.html' %}{% import 'macros.html' as m %}
+{% block body %}
+<header class="edition-head">
+  <p class="kicker">Мебель · Журнал выставки</p><h1>{{ 'Голоса спикеров' if speaker_feed else 'Лента участников' }}</h1>
+  {% if speaker_feed %}<p>Публикации авторов деловой программы. В профиле спикера можно проверить его выступление. <a href="#speaker-directory">Каналы и соцсети ↓</a></p>{% else %}<p>Фотографии со стендов, коллекции и новости компаний. Выберите тему или найдите свой стенд.</p>{% endif %}
+</header>
+{{ m.newsnav(active,nav) }}
+{% if config.journal %}<details class="source-note"><summary>Источники и дата обновления</summary>{% if speaker_feed %}<p>Проверены профессиональные профили из программы. Список подтверждённых соцсетей приведён внизу страницы. Для каждого доступного авторского канала взято до пяти сообщений.</p>{% else %}<p>22 ноября 2026 года проверены {{ channel_count }} ссылок из сайтов участников. Публичные сообщения доступны в {{ channel_preview_count }} каналах. Показано до десяти последних публикаций каждого доступного канала. Дата в карточке относится к оригинальному сообщению.</p>{% endif %}</details>{% endif %}
+<section class="filter-scope stream" data-limit="12">
+ <div class="filters"><input type="search" aria-label="Поиск публикаций" placeholder="Автор, товар или стенд…">
+ <select data-field="subject" aria-label="Тема"><option value="">Все темы</option>{% if not speaker_feed or speaker_items|selectattr('is_current_expo')|list %}<option>О выставке</option>{% endif %}<option>С фотографиями</option></select><button class="reset" type="button">Сбросить</button></div>
+ <p class="result-count muted small" aria-live="polite"></p>
+ <div class="feed-grid">{% for p in (speaker_items if speaker_feed else posts) %}{{ m.post(p,'',participant_map,person_map) }}{% endfor %}</div>
+ <p class="empty" hidden>Совпадений нет. Попробуйте другое имя или сбросьте фильтры.</p><button class="btn more">Показать ещё</button>
+</section>
+{% if speaker_feed %}<section id="speaker-directory"><h2>Спикеры и соцсети</h2><div class="directory">{% for p in people if p.socials %}<div><a href="{{ p.page }}">{{ p.name }}</a>{% for s in p.socials %} · <a href="{{ s.url }}">{{ s.label }}</a>{% endfor %}</div>{% endfor %}</div></section>{% endif %}
+{% endblock %}

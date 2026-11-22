@@ -1,0 +1,6 @@
+{% extends 'base.html' %}{% import 'macros.html' as m %}
+{% block body %}<header class="edition-head"><p class="kicker">Мебель · Анонсы из Telegram</p><h1>Розыгрыши и акции</h1><p>У кого разыгрывают призы, где вручат подарок на стенде и когда объявят результат.</p></header>
+{{ m.newsnav(active,nav) }}
+{% for group,rows in promotion_sections if rows %}<section class="promo-section"><h2>{{ group }}</h2><div class="product-grid">{% for p in rows %}<article class="product-card">{% if p.image %}<a href="{{ p.url }}" class="product-img"><img loading="lazy" src="{{ p.image }}" alt="{{ p.title }}"></a>{% endif %}<div><p class="kicker">{{ p.kind }} · {{ p.scope }}</p><h3>{{ p.title }}</h3><p>{{ p.description }}</p>{% if p.timing %}<p class="offer-time">{{ p.timing }}</p>{% endif %}{% if p.stand %}<p>Стенд {{ p.stand }}</p>{% endif %}
+<p class="small muted">{{ p.channel }} · публикация {{ p.published_at|date_text }}</p><a href="{{ p.url }}">Условия у автора ↗</a>{% for u in p.get('also',[]) %} · <a href="{{ u }}">Предыдущий анонс</a>{% endfor %}{{ m.linked(p,'',participant_map,person_map) }}</div></article>{% endfor %}</div></section>{% endfor %}
+{% if not booth_draws %}<p class="card">В проверенных публикациях нет подтверждённой жеребьёвки на стенде. Конкурсы, подарки посетителям и онлайн-розыгрыши перечислены выше при наличии анонсов.</p>{% endif %}{% endblock %}
