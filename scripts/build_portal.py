@@ -384,6 +384,7 @@ def build(root=ROOT, output_override=None):
     labels.update(config.get('labels', {}))
     nav = [('index.html', 'Главная')] + [(MODULES[k][0], labels[k]) for k in MODULES if k in active]
     speaker_items, business_guides, promotions = [], [], []
+    opportunity_guides = []
     factory_feed = read_json(root / 'data/portal/factory_feed.json', {}) if journal else {}
     factory_channels = {}
     factory_announced = {}
@@ -417,11 +418,18 @@ def build(root=ROOT, output_override=None):
             p['photos_view'] = [img for x in p.get('photos', []) if (img := asset(x, out))]
             speaker_items.append(p)
         speaker_items.sort(key=lambda p: p.get('published_at') or '', reverse=True)
-        business_guides = read_json(root / 'data/portal/business.json', [])
-        business_guides.extend(read_json(root / 'data/portal/avito_guides.json', []))
+        opportunity_guides = read_json(root / 'data/portal/opportunity_guides.json', [])
+        for guide in opportunity_guides:
+            guide['series'] = 'Новые идеи'
+        business_guides = (opportunity_guides + read_json(root / 'data/portal/business.json', [])
+                           + read_json(root / 'data/portal/avito_guides.json', []))
+        guide_ids = set()
         promotions = read_json(root / 'data/portal/promotions.json', [])
         for guide in business_guides:
             identifier(guide['id'])
+            if guide['id'] in guide_ids:
+                raise ValueError('Duplicate business guide: '+guide['id'])
+            guide_ids.add(guide['id'])
             if set(guide['people']) - participant_map.keys():
                 raise ValueError('Unknown business guide exhibitor')
     style = (root / 'portal_web/style.css').read_text(encoding='utf-8').encode('utf-8')
@@ -440,6 +448,7 @@ def build(root=ROOT, output_override=None):
                    dates_label=config.get('dates_label') or f'{start:%d.%m.%Y} — {end:%d.%m.%Y}')
     context.update(speaker_items=speaker_items, business_guides=business_guides,
                    business_groups=sorted({g['group'] for g in business_guides}),
+                   opportunity_count=len(opportunity_guides),
                    booth_draws=any(p['scope']=='На выставке' and p['kind']=='Розыгрыш' for p in promotions),
                    promotion_sections=[(group,[p for p in promotions if p['group']==group])
                                        for group in dict.fromkeys(p['group'] for p in promotions)])

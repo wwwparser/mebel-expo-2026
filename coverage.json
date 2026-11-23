@@ -45,7 +45,7 @@
     "html_responses": 215,
     "pages_with_novelty_links": 36
   },
-  "business_articles": 23,
+  "business_articles": 73,
   "promotion_cards": 11,
   "avito_furniture_guides": 10,
   "factory_feed": {
@@ -65,5 +65,9 @@
     "yandex_belarus_factory_rows": 833,
     "yandex_site_addresses_attempted": 5647,
     "yandex_site_addresses_with_html": 1983
-  }
+  },
+  "business_opportunity_guides": 50,
+  "business_opportunity_exhibitors": 60,
+  "business_opportunity_examples": 11,
+  "business_as_of": "2026-11-23"
 }
