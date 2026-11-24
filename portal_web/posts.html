@@ -5,7 +5,17 @@
   {% if speaker_feed %}<p>Публикации авторов деловой программы. В профиле спикера можно проверить его выступление. <a href="#speaker-directory">Каналы и соцсети ↓</a></p>{% else %}<p>Фотографии со стендов, коллекции и новости компаний. Выберите тему или найдите свой стенд.</p>{% endif %}
 </header>
 {{ m.newsnav(active,nav) }}
-{% if config.journal %}<details class="source-note"><summary>Источники и дата обновления</summary>{% if speaker_feed %}<p>Проверены профессиональные профили из программы. Список подтверждённых соцсетей приведён внизу страницы. Для каждого доступного авторского канала взято до пяти сообщений.</p>{% else %}<p>22 ноября 2026 года проверены {{ channel_count }} ссылок из сайтов участников. Публичные сообщения доступны в {{ channel_preview_count }} каналах. Показано до десяти последних публикаций каждого доступного канала. Дата в карточке относится к оригинальному сообщению.</p>{% endif %}</details>{% endif %}
+{% if config.journal %}
+<details class="source-note">
+ <summary>Источники{% if telegram_refresh.checked_at %} · обновлено {{ telegram_refresh.checked_at|date_text }}{% else %} и дата обновления{% endif %}</summary>
+ {% if speaker_feed %}
+ <p>{% if telegram_refresh %}Проверено {{ telegram_refresh.speaker_checked }} каналов, связанных со спикерами. В ленте публикации из {{ telegram_refresh.speaker_published_channels }} каналов.{% endif %} Для каждого авторского канала показано до пяти записей. Публикации из канала бюро отмечены отдельно.</p>
+ {% else %}
+ <p>Проверено {{ channel_count }} каналов с сайтов участников. Публичные сообщения доступны в {{ channel_preview_count }} каналах. Показано до десяти последних публикаций каждого доступного канала. Дата в карточке относится к оригинальному сообщению.</p>
+ {% endif %}
+ {% if (telegram_refresh.speaker_errors if speaker_feed else telegram_refresh.exhibitor_errors) %}<p>При ошибках загрузки сохранены записи из предыдущего среза.</p>{% endif %}
+</details>
+{% endif %}
 <section class="filter-scope stream" data-limit="12">
  <div class="filters"><input type="search" aria-label="Поиск публикаций" placeholder="Автор, товар или стенд…">
  <select data-field="subject" aria-label="Тема"><option value="">Все темы</option>{% if not speaker_feed or speaker_items|selectattr('is_current_expo')|list %}<option>О выставке</option>{% endif %}<option>С фотографиями</option></select><button class="reset" type="button">Сбросить</button></div>

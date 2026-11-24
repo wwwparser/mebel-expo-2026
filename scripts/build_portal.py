@@ -384,6 +384,7 @@ def build(root=ROOT, output_override=None):
     labels.update(config.get('labels', {}))
     nav = [('index.html', 'Главная')] + [(MODULES[k][0], labels[k]) for k in MODULES if k in active]
     speaker_items, business_guides, promotions = [], [], []
+    telegram_refresh = read_json(root / 'data/portal/telegram_refresh.json', {}) if journal else {}
     opportunity_guides = []
     factory_feed = read_json(root / 'data/portal/factory_feed.json', {}) if journal else {}
     factory_channels = {}
@@ -416,6 +417,8 @@ def build(root=ROOT, output_override=None):
             p['channel'] = {'title': p['channel_title'], 'url': p['channel_url']}
             p['excerpt'] = excerpt(p.get('text', ''), 45)
             p['photos_view'] = [img for x in p.get('photos', []) if (img := asset(x, out))]
+            p['preview_kind'] = next((m.get('type') for m in p.get('media', [])
+                                      if p['photos_view'] and m.get('local_path') == p['photos_view'][0]), None)
             speaker_items.append(p)
         speaker_items.sort(key=lambda p: p.get('published_at') or '', reverse=True)
         opportunity_guides = read_json(root / 'data/portal/opportunity_guides.json', [])
@@ -446,7 +449,7 @@ def build(root=ROOT, output_override=None):
                    giveaway_groups=list(giveaways.items()), rows=rows, feed_count=feed_count,
                    style_version=digest(style)[:16], script_version=digest(script)[:16],
                    dates_label=config.get('dates_label') or f'{start:%d.%m.%Y} — {end:%d.%m.%Y}')
-    context.update(speaker_items=speaker_items, business_guides=business_guides,
+    context.update(speaker_items=speaker_items, business_guides=business_guides, telegram_refresh=telegram_refresh,
                    business_groups=sorted({g['group'] for g in business_guides}),
                    opportunity_count=len(opportunity_guides),
                    booth_draws=any(p['scope']=='На выставке' and p['kind']=='Розыгрыш' for p in promotions),

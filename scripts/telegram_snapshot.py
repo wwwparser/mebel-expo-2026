@@ -59,20 +59,28 @@ def image_to_webp(url: str, media_dir: Path, seed: str) -> str | None:
         return None
 
 
-def fetch(channel: dict, checked: str, media_dir: Path) -> tuple[dict, list[dict]]:
+def fetch(channel: dict, checked: str, media_dir: Path | None, limit: int = 10) -> tuple[dict, list[dict]]:
     row = dict(channel)
     slug = slug_for(row)
     url = "https://t.me/s/" + slug
     try:
         response = get(url, MAX_HTML_BYTES)
         soup = BeautifulSoup(response.content, "html.parser")
-        nodes = soup.select(".tgme_widget_message")
+        nodes = [
+            node for node in soup.select(".tgme_widget_message[data-post]")
+            if re.fullmatch(re.escape(slug) + r"/\d+", node["data-post"], re.I)
+            and node.select_one("time[datetime]")
+            and node.select_one(".tgme_widget_message_text, .tgme_widget_message_photo_wrap, "
+                                ".tgme_widget_message_video_thumb, .tgme_widget_message_document_wrap, "
+                                ".tgme_widget_message_video_player, .tgme_widget_message_voice_player, "
+                                ".tgme_widget_message_poll, .tgme_widget_message_sticker")
+        ]
         title_node = soup.select_one(".tgme_channel_info_header_title")
         row.update(title=title_node.get_text(" ", strip=True) if title_node else row.get("title", slug),
                    checked_at=checked, final_url=response.url,
-                   status="public_preview" if nodes else "preview_no_messages", messages_checked=min(10, len(nodes)))
-        collected, albums = [], {}
-        for node in nodes[-10:]:
+                   status="public_preview" if nodes else "preview_no_messages", messages_checked=min(limit, len(nodes)))
+        collected = []
+        for node in nodes[-limit:]:
             raw_id = node.get("data-post", "")
             if not raw_id:
                 continue
@@ -87,12 +95,14 @@ def fetch(channel: dict, checked: str, media_dir: Path) -> tuple[dict, list[dict
                 style = element.get("style", "")
                 match = re.search(r"background-image:\s*url\(['\"]?(.*?)['\"]?\)", style)
                 media_url = match.group(1) if match else None
-                is_video = "video_thumb" in element.get("class", []) or element.find_parent(class_="tgme_widget_message_video_player") is not None
-                local = image_to_webp(media_url, media_dir, f"{ident}-{i}") if media_url else None
+                is_video = "tgme_widget_message_video_thumb" in element.get("class", []) or element.find_parent(class_="tgme_widget_message_video_player") is not None
+                local = image_to_webp(media_url, media_dir, f"{ident}-{i}") if media_url and media_dir is not None else None
                 if local and local not in photos:
                     photos.append(local)
                 media.append({"type": "video_preview" if is_video else "photo", "url": media_url,
-                              "local_path": local, "status": "saved" if local else ("download_failed" if media_url else "preview_url_missing")})
+                              "local_path": local, "status": "saved" if local else (
+                                  "preview_url_missing" if not media_url else
+                                  "pending" if media_dir is None else "download_failed")})
             # Video widgets use a public poster preview; record attribution explicitly.
             posts = {"id": ident, "channel_id": row["id"], "url": "https://t.me/" + raw_id,
                      "text": text, "published_at": time_node.get("datetime") if time_node else None,
