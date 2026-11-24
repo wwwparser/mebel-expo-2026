@@ -29,8 +29,8 @@
   "telegram_posts_current_expo": 104,
   "program_records": 26,
   "speaker_profiles": 42,
-  "verified_digital_solutions": 2,
-  "service_candidates_for_manual_review": 5,
+  "verified_digital_solutions": 10,
+  "service_candidates_for_manual_review": 1,
   "journal_as_of": "2026-11-24",
   "telegram_posts_with_media": 456,
   "speaker_profiles_checked": 42,
@@ -69,5 +69,7 @@
   "business_opportunity_guides": 50,
   "business_opportunity_exhibitors": 60,
   "business_opportunity_examples": 11,
-  "business_as_of": "2026-11-23"
+  "business_as_of": "2026-11-23",
+  "service_catalog_as_of": "2026-11-24",
+  "service_catalogue_records": 12
 }

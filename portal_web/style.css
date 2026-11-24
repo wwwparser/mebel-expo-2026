@@ -240,3 +240,13 @@ details.card{margin:8px 0}summary{cursor:pointer;color:var(--accent);padding:8px
 .avito-links{display:flex;flex-wrap:wrap;gap:8px}.stream-title{margin:15px 0 10px;font-size:1.4rem}#factory-stream .filters{margin:8px 0}#factory-stream .post{min-width:0}#factory-more{display:block;margin:18px auto}#factory-more[hidden]{display:none}@media(max-width:720px){.newsnav:has(a[href='factories.html']){display:flex;flex-wrap:wrap}.newsnav:has(a[href='factories.html']) a{flex:1 1 auto;padding:7px 6px}#factory-stream .filters select{flex:1 1 120px}#factory-stream .filters input{flex-basis:100%}}
 @media(min-width:370px) and (max-width:720px){.newsnav:has(a[href="factories.html"]){display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}.newsnav:has(a[href="factories.html"]) a{padding:5px 1px;font-size:12px}}
 .business-shortcuts{margin-top:16px}#ideas,#avito,#route{scroll-margin-top:72px}#ideas .more{margin:18px 0}#ideas .product-card h3{font-size:1.18rem;line-height:1.24;margin:.45rem 0}#ideas .business-picks{margin-bottom:10px}
+
+.service-shortcuts{margin-top:14px}
+.service-directory,.service-grid article,#meetings{scroll-margin-top:76px}
+.service-grid .pc-body{padding:18px}
+.service-grid h3{margin:.48rem 0}
+.service-task{border-top:1px solid var(--line);padding-top:12px}
+.service-evidence{margin-top:12px;color:var(--muted);font-size:.9rem}
+.service-evidence summary{cursor:pointer}
+.service-evidence ul{padding-left:18px}
+.service-directory .more{margin-top:18px}

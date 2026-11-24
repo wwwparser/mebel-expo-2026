@@ -1,64 +1,308 @@
 [
   {
-    "id": "service-bazis",
-    "title": "Система БАЗИС для мебельных предприятий",
-    "description": "Программный комплекс для проектирования мебели и подготовки производства: модули создания 3D-моделей, визуализации и формирования спецификаций.",
-    "evidence": "Интуитивное создание 3D-моделей мебели любой сложности",
+    "id": "service-partnersoft",
+    "title": "ПартнерСофт",
+    "participant_ids": [
+      "p-5756c073b7ff"
+    ],
+    "categories": [
+      "IT и автоматизация",
+      "Цифровые платформы"
+    ],
+    "description": "ПС:Управление мебельной фабрикой ERP+MES на платформе 1С и облачная CRM Orderix.Мебель.",
+    "business_task": "Провести заказ от заявки до монтажа и связать работу менеджера с очередью производства.",
+    "evidence": "В анонсе выставки описаны два сценария показа: заказ в ERP+MES до печати этикетки и заказ в CRM до монтажа.",
+    "url": "https://partnersoft.ru/mebel2026",
+    "checked_at": "2026-11-24",
+    "sources": [
+      {
+        "title": "Продукт или услуга",
+        "url": "https://partnersoft.ru/mebel2026",
+        "date": "2026-11-24"
+      },
+      {
+        "title": "Рубрика каталога выставки",
+        "url": "https://icatalog.expocentr.ru/ru/exhibitions/f33d045c-98f8-11ef-80ce-a0d3c1fab97f/rubricator/41",
+        "date": "2026-11-24"
+      }
+    ]
+  },
+  {
+    "id": "service-bplanner",
+    "title": "BPlanner",
+    "participant_ids": [
+      "p-8db29e082423"
+    ],
+    "categories": [
+      "IT и автоматизация",
+      "Цифровые платформы"
+    ],
+    "description": "Онлайн-конструктор мебели с 3D-проектированием, автоматическим расчётом цены и спецификацией. Команда анонсировала ИИ-агента «Бобер».",
+    "business_task": "Встроить подбор конфигурации на сайт и передать параметры заказа менеджеру или технологу.",
+    "evidence": "Команда BPlanner указала в собственном анонсе стенд 13B015. В официальном каталоге 13B015 закреплён за компанией «Топ Фасад».",
+    "url": "https://bplanner.me/forum/topic/polnym-hodom-idet-podgotovka-k-vystavke-v-moskve-mebel-2026-s-23-po-26-nojabrja/",
+    "checked_at": "2026-11-24",
+    "sources": [
+      {
+        "title": "Продукт или услуга",
+        "url": "https://bplanner.me/forum/topic/polnym-hodom-idet-podgotovka-k-vystavke-v-moskve-mebel-2026-s-23-po-26-nojabrja/",
+        "date": "2026-11-24"
+      },
+      {
+        "title": "Рубрика каталога выставки",
+        "url": "https://icatalog.expocentr.ru/ru/exhibitions/f33d045c-98f8-11ef-80ce-a0d3c1fab97f/rubricator/14",
+        "date": "2026-11-24"
+      }
+    ],
+    "placement": "На стенде «Топ Фасад», по анонсу BPlanner."
+  },
+  {
+    "id": "service-aiarsenal",
+    "title": "Арсенал ИИ",
+    "participant_ids": [
+      "p-a36220535530"
+    ],
+    "categories": [
+      "IT и автоматизация",
+      "Маркетинг и продвижение"
+    ],
+    "description": "Инструменты для мебельных продаж: квалификация лидов, помощник менеджера, проверка диалогов и выпускаемый командой контент.",
+    "business_task": "Проверить, как сервис собирает сведения о заказе, передаёт заявку менеджеру и помогает оценить качество обработки.",
+    "evidence": "Сайт описывает отдельные продукты для квалификации лидов, контроля качества, работы с базой клиентов и контента.",
+    "url": "https://aiarsenal.ru/",
+    "checked_at": "2026-11-24",
+    "sources": [
+      {
+        "title": "Продукт или услуга",
+        "url": "https://aiarsenal.ru/",
+        "date": "2026-11-24"
+      },
+      {
+        "title": "Рубрика каталога выставки",
+        "url": "https://icatalog.expocentr.ru/ru/exhibitions/f33d045c-98f8-11ef-80ce-a0d3c1fab97f/rubricator/14",
+        "date": "2026-11-24"
+      }
+    ]
+  },
+  {
+    "id": "service-aimebel",
+    "title": "AI Мебельщик / PlanPlace",
+    "participant_ids": [
+      "p-2e83932da409"
+    ],
+    "categories": [
+      "IT и автоматизация",
+      "Цифровые платформы"
+    ],
+    "description": "LiDAR-скан помещения с iPhone или iPad, проект кухни, расчёт, 3D и AR-примерка. Заявлена передача спецификации в БАЗИС.",
+    "business_task": "Связать замер, визуализацию для клиента и подготовку данных для производства.",
+    "evidence": "В карточке зала указан бренд AI Мебельщик. На сайте продукта показан процесс от скана комнаты до расчёта и экспорта.",
+    "url": "https://aimebel.online/",
+    "checked_at": "2026-11-24",
+    "sources": [
+      {
+        "title": "Продукт или услуга",
+        "url": "https://aimebel.online/",
+        "date": "2026-11-24"
+      },
+      {
+        "title": "Рубрика каталога выставки",
+        "url": "https://icatalog.expocentr.ru/ru/exhibitions/f33d045c-98f8-11ef-80ce-a0d3c1fab97f/rubricator/14",
+        "date": "2026-11-24"
+      },
+      {
+        "title": "Каталог зала 14",
+        "url": "https://icatalog.expocentr.ru/ru/exhibitions/f33d045c-98f8-11ef-80ce-a0d3c1fab97f?hallid=45",
+        "date": "2026-11-24"
+      }
+    ]
+  },
+  {
+    "id": "service-faeton",
+    "title": "Фаэтон",
+    "participant_ids": [
+      "p-697bc2ddd9e1"
+    ],
     "categories": [
       "IT и автоматизация"
     ],
-    "url": "https://www.bazissoft.ru/system/design",
+    "description": "Поставляет и внедряет программное обеспечение для проектирования, продаж и управления мебельным производством.",
+    "business_task": "Обсудить выбор САПР и MES, интеграцию со станками и сопровождение после запуска.",
+    "evidence": "Профильный раздел компании описывает ПО и внедрения для мебельной индустрии. Есть пример работы с фабрикой кухонь «Монтанья».",
+    "url": "https://faeton-spb.ru/catalog/programmnoe-obespechenie",
+    "checked_at": "2026-11-24",
+    "sources": [
+      {
+        "title": "Продукт или услуга",
+        "url": "https://faeton-spb.ru/catalog/programmnoe-obespechenie",
+        "date": "2026-11-24"
+      },
+      {
+        "title": "Рубрика каталога выставки",
+        "url": "https://icatalog.expocentr.ru/ru/exhibitions/f33d045c-98f8-11ef-80ce-a0d3c1fab97f/rubricator/14",
+        "date": "2026-11-24"
+      },
+      {
+        "title": "Кейс внедрения «Монтанья»",
+        "url": "https://faeton-spb.ru/news/03.03.26.modernizaciya-proizvodstva-mebelnih-fasadov-opit-fabriki-kuhon-montanya",
+        "date": "2026-11-24"
+      }
+    ]
+  },
+  {
+    "id": "service-bazis",
+    "title": "БАЗИС-Центр",
     "participant_ids": [
       "p-abc70e6fdae9"
     ],
+    "categories": [
+      "IT и автоматизация"
+    ],
+    "description": "Комплекс мебельного проектирования и подготовки производства: 3D-модели, спецификации, чертежи и данные для цеха.",
+    "business_task": "Сократить ручную подготовку заказа и сравнить варианты передачи спецификаций между проектированием и производством.",
+    "evidence": "На сайте перечислены модули проектирования. Участник подтверждён в официальной рубрике ПО.",
+    "url": "https://www.bazissoft.ru/system/design",
+    "checked_at": "2026-11-24",
     "sources": [
       {
-        "title": "Возможности модулей проектирования БАЗИС",
+        "title": "Продукт или услуга",
         "url": "https://www.bazissoft.ru/system/design",
-        "date": "2026-11-16"
+        "date": "2026-11-24"
       },
       {
-        "title": "Официальный сайт БАЗИС-ЦЕНТР",
-        "url": "https://www.bazissoft.ru/",
-        "date": "2026-11-16"
-      },
-      {
-        "title": "Участник МЕБЕЛЬ-2026: БАЗИС-ЦЕНТР",
-        "url": "https://www.meb-expo.ru/ru/exhibition/exhibitors/",
-        "date": "2026-11-13",
-        "note": "Официальный каталог: стенд 14F070"
+        "title": "Рубрика каталога выставки",
+        "url": "https://icatalog.expocentr.ru/ru/exhibitions/f33d045c-98f8-11ef-80ce-a0d3c1fab97f/rubricator/14",
+        "date": "2026-11-24"
       }
     ]
   },
   {
     "id": "service-fabrikod",
-    "title": "Фабрикод: конфигуратор мебели, расчёт цены и интеграция с CRM",
-    "description": "Цифровой сервис для мебельных заказов связывает конфигуратор и расчёт с передачей заказов в интернет-магазин и CRM. Полезен производителям, которые хотят автоматизировать путь от выбора параметров изделия до производственного заказа.",
-    "evidence": "Фабрикод — программа для расчёта корпусной мебели: клиент или менеджер выбирает размеры, материалы и комплектацию, система проверяет правила, рассчитывает стоимость и формирует готовую заявку.",
+    "title": "Фабрикод",
+    "participant_ids": [
+      "p-c5ab0b69bb3b"
+    ],
     "categories": [
       "IT и автоматизация",
       "Цифровые платформы"
     ],
+    "description": "Конфигуратор корпусной мебели с расчётом цены, спецификациями, файлами для ЧПУ и интеграцией с интернет-магазином.",
+    "business_task": "Встроить создание заказа в продажи и проверить передачу согласованной комплектации в производство.",
+    "evidence": "Официальный каталог относит участника к технологиям для мебельного ретейла. Описание продукта подтверждает расчёт и передачу заказа.",
     "url": "https://fabrikod.ru/solutions/visual-cpq",
-    "participant_ids": [
-      "p-c5ab0b69bb3b"
-    ],
+    "checked_at": "2026-11-24",
     "sources": [
       {
-        "title": "Расчёт мебели и коммерческого предложения — Фабрикод",
+        "title": "Продукт или услуга",
         "url": "https://fabrikod.ru/solutions/visual-cpq",
-        "date": "2026-11-16"
+        "date": "2026-11-24"
       },
       {
-        "title": "Интеграция с интернет-магазином — Фабрикод",
+        "title": "Рубрика каталога выставки",
+        "url": "https://icatalog.expocentr.ru/ru/exhibitions/f33d045c-98f8-11ef-80ce-a0d3c1fab97f/rubricator/21",
+        "date": "2026-11-24"
+      },
+      {
+        "title": "Интеграция с интернет-магазином",
         "url": "https://fabrikod.ru/solutions/ecommerce-integration",
-        "date": "2026-11-16"
+        "date": "2026-11-24"
+      }
+    ]
+  },
+  {
+    "id": "service-fcproject",
+    "title": "FCProject / FCP Media",
+    "participant_ids": [
+      "p-a06e49d3817f"
+    ],
+    "categories": [
+      "Маркетинг и продвижение",
+      "Медиа и издательства"
+    ],
+    "description": "Коммуникационное агентство мебельной отрасли. Отраслевое медиа, подкасты, деловые события, стажировки и бизнес-туры.",
+    "business_task": "Найти отраслевую аудиторию для партнёрского материала или обсудить выступление, контент и знакомства с фабриками.",
+    "evidence": "Сайт описывает медиа и мероприятия. Экспоцентр указывает FCProject среди организаторов Furniture Retail Fest.",
+    "url": "https://fcproject.ru/",
+    "checked_at": "2026-11-24",
+    "sources": [
+      {
+        "title": "Продукт или услуга",
+        "url": "https://fcproject.ru/",
+        "date": "2026-11-24"
       },
       {
-        "title": "Участник МЕБЕЛЬ-2026: ФАБРИКОД",
-        "url": "https://www.meb-expo.ru/ru/exhibition/exhibitors/",
-        "date": "2026-11-13",
-        "note": "Официальный каталог: стенд 15B094"
+        "title": "Рубрика каталога выставки",
+        "url": "https://icatalog.expocentr.ru/ru/exhibitions/f33d045c-98f8-11ef-80ce-a0d3c1fab97f/rubricator/10",
+        "date": "2026-11-24"
+      },
+      {
+        "title": "Программа Furniture Retail Fest",
+        "url": "https://frf.fcproject.ru/",
+        "date": "2026-11-24"
+      }
+    ]
+  },
+  {
+    "id": "service-mebelshik",
+    "title": "Мебельщик",
+    "participant_ids": [
+      "p-6d8f921f8e09",
+      "p-00f198ff7ddf",
+      "p-f14cb56f41c9"
+    ],
+    "categories": [
+      "Медиа и издательства",
+      "Маркетинг и продвижение"
+    ],
+    "description": "Портал для специалистов отрасли и журналы «Мебельщик», «Мебельщик Сибири» и «Мебельщик Юга».",
+    "business_task": "Запросить аудиторию по регионам, условия размещения и вариант публикации для мебельщиков.",
+    "evidence": "Три карточки официального списка ведут на один стенд. Портал объединяет журналы и публикации для отрасли.",
+    "url": "https://www.mebelshik.biz/magazines/",
+    "checked_at": "2026-11-24",
+    "sources": [
+      {
+        "title": "Продукт или услуга",
+        "url": "https://www.mebelshik.biz/magazines/",
+        "date": "2026-11-24"
+      },
+      {
+        "title": "Рубрика каталога выставки",
+        "url": "https://icatalog.expocentr.ru/ru/exhibitions/f33d045c-98f8-11ef-80ce-a0d3c1fab97f/rubricator/10",
+        "date": "2026-11-24"
+      }
+    ],
+    "placement": "У трёх изданий одна точка в каталоге — 14A080."
+  },
+  {
+    "id": "service-forestcomplex",
+    "title": "Лесной комплекс / Индустрия мебели",
+    "participant_ids": [
+      "p-4ee2bd1bd4df"
+    ],
+    "categories": [
+      "Медиа и издательства",
+      "Маркетинг и продвижение"
+    ],
+    "description": "Отраслевой портал и журнал с рекламными форматами. «Индустрия мебели» развивает контент для предприятий отрасли.",
+    "business_task": "Сверить аудиторию для продвижения ПО, материалов и оборудования. Запросить формат размещения и охват.",
+    "evidence": "На официальной странице проекта описаны баннеры и реклама в журнале. В Telegram опубликован анонс совместной экспозиции.",
+    "url": "https://forestcomplex.ru/reklamodatelyam/",
+    "checked_at": "2026-11-24",
+    "sources": [
+      {
+        "title": "Продукт или услуга",
+        "url": "https://forestcomplex.ru/reklamodatelyam/",
+        "date": "2026-11-24"
+      },
+      {
+        "title": "Рубрика каталога выставки",
+        "url": "https://icatalog.expocentr.ru/ru/exhibitions/f33d045c-98f8-11ef-80ce-a0d3c1fab97f/rubricator/10",
+        "date": "2026-11-24"
+      },
+      {
+        "title": "Публикация со стенда",
+        "url": "https://t.me/forestcomplex/4571",
+        "date": "2026-11-24"
       }
     ]
   }

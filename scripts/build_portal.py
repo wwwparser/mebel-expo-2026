@@ -460,7 +460,18 @@ def build(root=ROOT, output_override=None):
     context['service_summary'] = screening.get('summary', {})
     context['service_candidates'] = [c for c in screening.get('candidates', [])
                                      if c.get('participant_id') in participant_map]
+    context['service_unplaced'] = screening.get('unplaced', [])
+    context['service_meetings'] = screening.get('program_meetings', [])
+    context['service_meeting_source'] = screening.get('program_source')
+    for url in [context['service_meeting_source'], *(item.get('url') for item in context['service_unplaced'])]:
+        if url and not safe_url(url):
+            raise ValueError('Unsafe service source URL')
     context['service_categories'] = sorted({category for item in rows['services'] for category in item.get('categories', [])})
+    service_links = defaultdict(list)
+    for service in rows['services']:
+        for participant_id in service.get('participant_ids', []):
+            service_links[participant_id].append(service)
+    context['service_links'] = service_links
     event_name = config.get('brand_name') or f'{config["name"]} {config["edition"]}'
     context['event_schema'] = {'@context': 'https://schema.org', '@type': 'Event',
         'name': event_name, 'startDate': config['start_date'],
@@ -515,13 +526,15 @@ def build(root=ROOT, output_override=None):
         generated['exports/services.json'] = (json.dumps(rows['services'], ensure_ascii=False, indent=2) + '\n').encode('utf-8')
         generated['exports/service-screening.json'] = (json.dumps(screening, ensure_ascii=False, indent=2) + '\n').encode('utf-8')
         service_csv = io.StringIO(newline='')
-        sw = csv.writer(service_csv)
-        sw.writerow(['id', 'title', 'categories', 'participant_ids', 'description', 'evidence', 'url', 'sources'])
+        sw = csv.writer(service_csv, lineterminator='\n')
+        sw.writerow(['id', 'title', 'categories', 'participant_ids', 'description', 'evidence', 'url', 'sources', 'stands', 'business_task'])
         for service in rows['services']:
+            stands = dict.fromkeys(stand for pid in service.get('participant_ids', []) for stand in participant_map[pid].get('stands', []))
             sw.writerow([service['id'], service['title'], '; '.join(service.get('categories', [])),
                          '; '.join(service.get('participant_ids', [])), service.get('description', ''),
                          service.get('evidence', ''), service.get('url', ''),
-                         '; '.join(source['url'] for source in service['sources'])])
+                         '; '.join(source['url'] for source in service['sources']), '; '.join(stands),
+                         service.get('business_task', '')])
         generated['exports/services.csv'] = service_csv.getvalue().encode('utf-8-sig')
     output_csv = io.StringIO(newline='')
     writer = csv.writer(output_csv)

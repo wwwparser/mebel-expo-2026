@@ -1,7 +1,91 @@
-{% extends 'base.html' %}{% import 'macros.html' as m %}{% block body %}
-<header class="market-head"><p class="kicker">{{ config.brand_name }}</p><h1>{{ labels.services }}</h1><p class="lead">В подборку попадают услуги, которые участник предлагает другим компаниям и которые подтверждены открытым источником.</p></header>
-<section class="filter-scope" data-limit="24"><h2>{{ items|length }} подтверждённые услуги</h2><div class="filters"><input type="search" aria-label="Поиск услуг" placeholder="Решение, задача или компания…">{% if service_categories %}<select data-field="categories" aria-label="Направление"><option value="">Все направления</option>{% for category in service_categories %}<option>{{ category }}</option>{% endfor %}</select>{% endif %}<button class="reset">Сбросить</button></div><p class="result-count muted small" aria-live="polite"></p><div class="cards3">{% for item in items %}<article class="card filter-item" data-search="{{ (item.title+' '+item.description+' '+(item.categories|join(' ')))|lower }}" data-categories="{{ item.categories|join(' | ') }}"><p class="kicker">{{ item.categories|join(' · ') }}</p><h3>{{ item.title }}</h3><p>{{ item.description }}</p><blockquote>{{ item.evidence }}</blockquote><a href="{{ item.url }}" target="_blank" rel="noopener">Описание продукта ↗</a>{{ m.linked(item,'',participant_map,person_map) }}{{ m.bibliography(item.sources) }}</article>{% endfor %}</div><p class="empty" hidden>Подходящие услуги не найдены. Измените запрос или сбросьте фильтры.</p></section>
-<p class="small"><a href="exports/services.csv">Скачать подтверждённые решения CSV</a> · <a href="exports/services.json">JSON</a> · <a href="exports/service-screening.json">Реестр кандидатов и охвата проверки</a></p>
-<section class="card"><p>Подборка включает услуги, которые участники предлагают другим компаниям и которые подтверждены открытыми источниками. Производственные и торговые компании не включаются лишь из-за наличия сайта или внутренних цифровых систем.</p><p class="small muted">Проверено {{ service_summary.get('catalogue_rows', 0) }} строк каталога; проверено сайтов из официального путеводителя: {{ service_summary.get('websites_attempted', 0) }}, из них открылись: {{ service_summary.get('websites_reachable', 0) }}. Дата среза: {{ config.checked_at|date_text }}.</p></section>
-{% if service_candidates %}<section><h2>Кандидаты на проверку: {{ service_candidates|length }}</h2><div class="cards3">{% for c in service_candidates %}<article class="card"><p class="kicker">Стенд {{ c.stand or 'не указан' }} · требует проверки</p><h3><a href="{{ participant_map[c.participant_id].page }}">{{ c.name }}</a></h3>{% for evidence in c.site_evidence %}<blockquote>{{ evidence }}</blockquote>{% endfor %}{% if c.screening_terms %}<p class="small muted">Причина отбора: {{ c.screening_terms|join(', ') }}</p>{% endif %}{% for url in c.source_urls %}<p><a href="{{ url }}" target="_blank" rel="noopener">Сайт из официального путеводителя ↗</a></p>{% endfor %}<p class="small muted">{{ c.note }}</p></article>{% endfor %}</div></section>{% endif %}
+{% extends 'base.html' %}
+{% import 'macros.html' as m %}
+{% block body %}
+<header class="edition-head">
+  <p class="kicker">{{ config.brand_name }} · Цифровые и деловые услуги</p>
+  <h1>IT, маркетинг и медиа</h1>
+  <p>Найдите тех, кто автоматизирует продажи и производство, делает отраслевой контент или помогает продвигать мебель.</p>
+  <p class="small muted">{{ items|length }} точек для встреч{% if service_summary.catalogue_records_selected %} · {{ service_summary.catalogue_records_selected }} карточек участников{% endif %}{% if service_summary.checked_at %} · проверено {{ service_summary.checked_at|date_text }}{% endif %}</p>
+  <div class="links service-shortcuts">
+    <a class="chip" href="#directory">Все стенды ↓</a>
+    {% if service_meetings %}<a class="chip" href="#meetings">Встречи на FRF ↓</a>{% endif %}
+    <a class="chip" href="exports/services.csv">Скачать CSV</a>
+  </div>
+</header>
+<section class="filter-scope service-directory" id="directory" data-limit="24">
+  <h2>Компании и продукты</h2>
+  <div class="filters">
+    <input type="search" aria-label="Поиск IT и услуг" placeholder="Компания, задача или стенд…">
+    {% if service_categories %}
+    <select data-field="categories" aria-label="Направление услуг">
+      <option value="">Все направления</option>{% for category in service_categories %}<option>{{ category }}</option>{% endfor %}
+    </select>
+    {% endif %}
+    <button type="button" class="reset">Сбросить</button>
+  </div>
+  <p class="result-count muted small" aria-live="polite"></p>
+  <div class="cat service-grid">
+    {% for item in items %}
+    {% set categories = item.categories|default([]) %}
+    {% set members = [] %}
+    {% for pid in item.participant_ids|default([]) %}{% set _ = members.append(participant_map[pid]) %}{% endfor %}
+    {% set stands = [] %}
+    {% set names = [] %}
+    {% for p in members %}
+      {% set _ = names.append(p.name) %}
+      {% for stand in p.stands if stand not in stands %}{% set _ = stands.append(stand) %}{% endfor %}
+    {% endfor %}
+    <article class="pcard filter-item" id="{{ item.id }}" data-categories="{{ categories|join(' | ') }}" data-search="{{ ([item.title,item.description,item.business_task|default(''),item.evidence|default(''),item.placement|default('')]+categories+stands+names)|join(' ')|lower }}">
+      <div class="pc-body">
+        <p class="pc-tags">{% for stand in stands %}<span class="tag stand">Стенд {{ stand }}</span>{% endfor %}</p>
+        <h3>{{ item.title }}</h3>
+        {% if categories %}<p class="pc-tags">{% for category in categories %}<span class="tag">{{ category }}</span>{% endfor %}</p>{% endif %}
+        {% if item.placement %}<p class="small muted">{{ item.placement }}</p>{% endif %}
+        <p>{{ item.description }}</p>
+        {% if item.business_task %}<p class="service-task"><strong>Что обсудить на стенде</strong><br>{{ item.business_task }}</p>{% endif %}
+        <div class="links">
+          {% if item.url %}<a class="chip" href="{{ item.url }}" target="_blank" rel="noopener">Продукт или услуга ↗</a>{% endif %}
+          {% for p in members[:1] %}<a class="chip" href="{{ p.page }}">Карточка участника →</a>{% endfor %}
+        </div>
+        {% if item.evidence or item.sources or members|length > 1 %}
+        <details class="service-evidence">
+          <summary>Источники{% if members|length > 1 %} и карточки{% endif %}</summary>
+          {% if item.evidence %}<p>{{ item.evidence }}</p>{% endif %}
+          {{ m.bibliography(item.sources) }}
+          {% if members|length > 1 %}<ul>{% for p in members %}<li><a href="{{ p.page }}">{{ p.name }}</a></li>{% endfor %}</ul>{% endif %}
+        </details>
+        {% endif %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+  <p class="empty" hidden>Подходящих компаний нет. Измените запрос или сбросьте фильтры.</p>
+  <button type="button" class="btn more" hidden>Показать ещё</button>
+</section>
+{% if service_meetings %}
+<section id="meetings">
+  <h2>Кого искать на Furniture Retail Fest</h2>
+  <p>Эти команды заявлены в деловой программе. Встречи ищите в зале 14, на площадке «Формула продаж».</p>
+  <div class="cards3">
+    {% for meeting in service_meetings %}
+    <article class="card">
+      <p class="kicker">{{ meeting.when }}</p><h3>{{ meeting.names }}</h3><p>{{ meeting.topic }}</p>
+    </article>
+    {% endfor %}
+  </div>
+  {% if service_meeting_source %}<p><a href="{{ service_meeting_source }}">Расписание организатора ↗</a></p>{% endif %}
+</section>
+{% endif %}
+<section id="selection">
+  <h2>Что проверено</h2>
+  <p>Изучены названия и сведения по {{ service_summary.get('catalogue_rows', participants|length) }} карточкам, а также рубрики ПО, технологий ретейла и специализированных СМИ. Возможности продуктов приведены по материалам компаний.</p>
+  <p class="small"><a href="exports/services.json">Каталог в JSON</a> · <a href="exports/service-screening.json">Рубрики и охват проверки</a></p>
+  {% if service_unplaced or service_candidates %}
+  <details class="source-note">
+    <summary>Кандидаты без подтверждённого предложения или стенда</summary>
+    {% for candidate in service_unplaced %}<p><a href="{{ candidate.url }}">{{ candidate.name }}</a>. {{ candidate.reason }}</p>{% endfor %}
+    {% for candidate in service_candidates %}<p><a href="{{ participant_map[candidate.participant_id].page }}">{{ candidate.name }}</a>. {{ candidate.note }}</p>{% endfor %}
+  </details>
+  {% endif %}
+</section>
 {% endblock %}
