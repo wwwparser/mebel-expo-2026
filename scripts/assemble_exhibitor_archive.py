@@ -121,6 +121,57 @@ def combine_companies(all_rows):
     return sorted(result, key=lambda c: (c["name"].casefold(), c["country"], c["id"]))
 
 
+def merge_reviewed_companies(companies, reviews):
+    """Apply reviewed links between catalog names and retain every source and old anchor."""
+    by_id = {company["id"]: company for company in companies}
+    related = defaultdict(set)
+    for review in reviews:
+        left, right = review["ids"]
+        if left == right or left not in by_id or right not in by_id:
+            raise ValueError(f"Invalid duplicate review: {review}")
+        if by_id[left]["country"] != by_id[right]["country"]:
+            raise ValueError(f"Duplicate review links different countries: {review}")
+        related[left].add(right)
+        related[right].add(left)
+
+    removed, visited = set(), set()
+    for first in related:
+        if first in visited:
+            continue
+        cluster = set()
+        pending = [first]
+        while pending:
+            ident = pending.pop()
+            if ident not in cluster:
+                cluster.add(ident)
+                pending.extend(related[ident] - cluster)
+        members = sorted((by_id[ident] for ident in cluster),
+                         key=lambda c: (not c.get("profile_id"), -c["years"][0], -len(c["years"]), c["id"]))
+        primary = members[0]
+        primary["aliases"] = sorted(cluster - {primary["id"]})
+        primary["years"] = sorted({year for item in members for year in item["years"]}, reverse=True)
+        primary["profiles"] = sorted((profile for item in members for profile in item["profiles"]),
+                                     key=lambda p: (-p["year"], p["source"], p["name"]))
+        profile_ids = list(dict.fromkeys(item["profile_id"] for item in members if item.get("profile_id")))
+        if len(profile_ids) > 1:
+            primary["profile_ids"] = profile_ids
+        primary["city"] = next((item["city"] for item in members if item["city"]), "")
+        for field in ("websites", "emails", "phones"):
+            contacts = sorted((contact for item in members for contact in item[field]),
+                              key=lambda c: -c["year"])
+            distinct = {}
+            for contact in contacts:
+                key = contact["url"].casefold().removeprefix("http://").removeprefix("https://").removeprefix("www.").rstrip("/")
+                distinct.setdefault(key, contact)
+            primary[field] = list(distinct.values())
+        for item in members[1:]:
+            for handle, source in item["telegram_candidates"].items():
+                primary["telegram_candidates"].setdefault(handle, source)
+        visited.update(cluster)
+        removed.update(primary["aliases"])
+    return [company for company in companies if company["id"] not in removed]
+
+
 def main():
     current_rows = read(DATA / "participants.json")
     current_by_name = defaultdict(list)
@@ -158,6 +209,7 @@ def main():
                              source=HOST + token + "/list", russia=sum(e["country"] == "Россия" for e in entries),
                              china=sum(e["country"] in ("Китай", "Гонконг, Китай") for e in entries)))
     companies = combine_companies(all_rows + extra_current)
+    companies = merge_reviewed_companies(companies, read(DATA / "exhibitor_merges.json"))
     website_proofs = defaultdict(dict)
     successful_sites = set()
     for path in SITE_CACHE.glob("*.json"):
@@ -193,14 +245,16 @@ def main():
             if len(domain_companies[domain]) == 1:
                 for handle, source in website_proofs.get(domain, {}).items():
                     candidates.setdefault(handle, source)
-        for handle in original_by_company[company.get("profile_id")]:
+        profile_ids = company.get("profile_ids", [company.get("profile_id")])
+        known_handles = {handle for pid in profile_ids for handle in original_by_company[pid]}
+        for handle in sorted(known_handles):
             known = original_by_handle[handle]
             source = next((s for s in known.get("source_urls", []) if safe_url(s)), "")
             if source:
                 candidates.setdefault(handle, source)
         company["telegram"] = []
         for handle, source in sorted(candidates.items()):
-            if handle in UNRELATED_TELEGRAM and handle not in original_by_company[company.get("profile_id")]:
+            if handle in UNRELATED_TELEGRAM and handle not in known_handles:
                 continue
             original = original_by_handle.get(handle)
             record = new_channels.get(handle, {})

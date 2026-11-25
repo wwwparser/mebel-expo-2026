@@ -536,7 +536,8 @@ def build(root=ROOT, output_override=None):
                    dates_label=config.get('dates_label') or f'{start:%d.%m.%Y} — {end:%d.%m.%Y}')
     context['archive_summary'] = archive.get('summary', {})
     if archive:
-        context['archive_by_profile'] = {c['profile_id']: c for c in archive_companies.values() if c.get('profile_id')}
+        context['archive_by_profile'] = {pid: c for c in archive_companies.values()
+            for pid in c.get('profile_ids', [c.get('profile_id')]) if pid}
         feed_channels = {post['handle']: post['channel']['title'] for post in rows['posts']}
         context['feed_channels'] = [{'handle': handle, 'title': title}
             for handle, title in sorted(feed_channels.items(), key=lambda pair: pair[1].casefold())]

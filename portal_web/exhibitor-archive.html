@@ -39,13 +39,19 @@
     <article class="card archive-company filter-item" id="{{ company.id }}" data-years="{{ company.years|join(' | ') }}"
        data-country="{{ company.country }}" data-contacts="{{ contact_types|join(' | ') }}"
        data-search="{{ [names,company.city,company.country,company.websites|map(attribute='value')|join(' '),company.profiles|map(attribute='stands')|sum(start=[])|join(' '),company.telegram|map(attribute='handle')|join(' ')]|join(' ') }}">
+      {% for alias in company.aliases %}<span id="{{ alias }}" hidden></span>{% endfor %}
       <div class="archive-company-head">
         <p class="small muted">{{ company.country }}{% if company.city %} · {{ company.city }}{% endif %}</p>
         <h2>{% if company.profile_id %}<a href="{{ prefix }}participants/{{ company.profile_id }}.html">{{ company.name }}</a>{% else %}{{ company.name }}{% endif %}</h2>
       </div>
       <ul class="archive-editions" aria-label="Участие по годам">
+      {% set badges = [] %}
       {% for edition in company.profiles %}
-        <li><a href="{{ edition.source }}" title="Карточка в официальном каталоге">{{ edition.year }}{% if edition.stands %} · {{ edition.stands|join(', ') }}{% endif %}</a></li>
+        {% set badge = edition.year|string ~ (' · ' ~ edition.stands|join(', ') if edition.stands else '') %}
+        {% if badge not in badges %}
+          {% set _ = badges.append(badge) %}
+          <li><a href="{{ edition.source }}" title="Карточка в официальном каталоге">{{ badge }}</a></li>
+        {% endif %}
       {% endfor %}
       </ul>
       {% if company.websites or company.phones or company.emails or company.telegram %}

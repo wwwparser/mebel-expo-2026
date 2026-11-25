@@ -116,18 +116,18 @@
         "china": 190
       }
     ],
-    "companies": 2407,
+    "companies": 2232,
     "supplemental_current": 5,
     "sites_attempted": 1741,
     "sites_checked": 1318,
-    "companies_with_website": 1956,
-    "companies_with_email_or_phone": 2306,
-    "channels": 261,
-    "new_channels": 198,
+    "companies_with_website": 1790,
+    "companies_with_email_or_phone": 2131,
+    "channels": 287,
+    "new_channels": 224,
     "refreshed_channels": 2,
-    "new_posts": 1561,
-    "archive_posts_with_preview": 1381,
-    "russia_companies": 1285,
-    "china_companies": 927
+    "new_posts": 1766,
+    "archive_posts_with_preview": 1563,
+    "russia_companies": 1135,
+    "china_companies": 902
   }
 }
