@@ -37,9 +37,9 @@
   "speaker_direct_profiles": 4,
   "speaker_organization_only": 3,
   "speaker_posts": 24,
-  "product_cards": 40,
-  "product_expo_announcements": 9,
-  "product_website_cards": 11,
+  "product_cards": 57,
+  "product_expo_announcements": 19,
+  "product_website_cards": 31,
   "site_survey": {
     "urls": 284,
     "html_responses": 215,
@@ -71,5 +71,13 @@
   "business_opportunity_examples": 11,
   "business_as_of": "2026-11-23",
   "service_catalog_as_of": "2026-11-24",
-  "service_catalogue_records": 12
+  "service_catalogue_records": 12,
+  "product_expo_confirmed": 1,
+  "novelty_website_review": {
+    "checked_at": "2026-11-25",
+    "sites": 284,
+    "site_responses": 214,
+    "linked_pages": 299,
+    "linked_page_responses": 288
+  }
 }

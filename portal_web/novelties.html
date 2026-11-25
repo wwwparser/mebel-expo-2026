@@ -1,24 +1,83 @@
 {% extends 'base.html' %}{% import 'macros.html' as m %}
+{% block page_styles %}<link rel="stylesheet" href="{{ prefix }}portal-assets/novelties.css?v={{ novelty_css_version }}">{% endblock %}
+{% block page_scripts %}<script src="{{ prefix }}portal-assets/novelties.js?v={{ novelty_js_version }}" defer></script>{% endblock %}
 {% block body %}
-<header class="edition-head"><p class="kicker">Мебель · Обзор продуктов</p><h1>Новинки</h1><p>Что изменилось в ассортименте и что участники обещают показать на выставке.</p></header>
+<header class="edition-head novelty-head">
+  <p class="kicker">Мебель · Обзор продуктов{% if novelty_scan.checked_at %} · {{ novelty_scan.checked_at|date_text }}{% endif %}</p>
+  <h1>Новинки {{ novelty_year }}</h1>
+  <p>Что участники выпустили за год и что можно посмотреть на «Мебели». Найдите товар, компанию или номер стенда.</p>
+</header>
 {{ m.newsnav(active,nav) }}
-<details class="source-note"><summary>Как отобраны товары</summary><p>В подборку вошли товары с фотографией и описанием из Telegram или с сайта поставщика. Метка «Анонс выставки» означает, что компания или отраслевое издание прямо назвали товар и место показа. В остальных карточках можно открыть каталог и уточнить наличие у поставщика.</p></details>
-<section class="filter-scope stream" data-limit="18">
-<div class="filters"><input type="search" placeholder="Товар, бренд, стенд…" aria-label="Поиск новинок"><select data-field="kind" aria-label="Где представлено"><option value="">Все новинки</option><option>Анонс выставки</option><option>В ассортименте</option></select><button type="button" class="reset">Сбросить</button></div>
-<p class="result-count small muted" aria-live="polite"></p>
-<div class="product-grid">
-{% for x in items %}
-  {% set names=[] %}{% for pid in x.participant_ids %}{% set c=participant_map[pid] %}{% set _=names.append(c.name+' '+' '.join(c.stands)) %}{% endfor %}
-  {% set kind='Анонс выставки' if x.expo else 'В ассортименте' %}
-  <article class="product-card filter-item" data-kind="{{ kind }}" data-search="{{ (x.title+' '+x.description+' '+' '.join(names))|lower }}">
-    {% if x.image_view %}<a href="{{ x.url }}" class="product-img"><img loading="lazy" src="{{ x.image_view }}" alt="{{ x.title }}"></a>{% endif %}
-    <div><p class="kicker">{{ kind }}</p><h2>{{ x.title }}</h2><p>{{ x.description }}</p>
-      {% for id in x.participant_ids %}{% set c=participant_map[id] %}<p class="small"><a href="{{ c.page }}">{{ c.name }}</a> · {{ c.stands|join(', ') }}</p>{% endfor %}
-      <p class="small muted">{% if x.published_at %}Опубликовано {{ x.published_at|date_text }}{% else %}Проверено {{ x.checked_at|date_text }}{% endif %}</p>
-      <a href="{{ x.url }}">{{ 'Публикация в Telegram' if x.source_type=='Telegram' else 'Карточка производителя' }} ↗</a>
-      {% if x.source_type!='Telegram' and x.sources|length>1 %} · <a class="small" href="{{ x.sources[1].url }}">Подборка новинок</a>{% endif %}
-      {% if x.photo_source %} · <a class="small" href="{{ x.photo_source }}">Фото</a>{% endif %}
-    </div>
-  </article>
-{% endfor %}
-</div><p class="empty" hidden>Новинки по этим условиям не найдены.</p><button class="btn more">Показать ещё</button></section>{% endblock %}
+{% if novelty_route %}
+<details id="route" class="novelty-route">
+  <summary>
+    <strong>Маршрут по стендам</strong>
+    <span>Зал {{ novelty_route.keys()|join(' → ') }}</span>
+  </summary>
+  <div class="novelty-route-inner">
+    {% for hall, stops in novelty_route.items() %}
+    <section>
+      <h2>Зал {{ hall }}</h2>
+      <ul>{% for stop in stops %}<li><a href="#{{ stop.id }}"><strong>{{ stop.stands_view|join(', ') }}</strong> {{ stop.brand }}</a></li>{% endfor %}</ul>
+    </section>
+    {% endfor %}
+    {% if 'map' in enabled %}<p><a href="{{ prefix }}map.html">Схема выставки →</a></p>{% endif %}
+  </div>
+</details>
+{% endif %}
+<section class="filter-scope stream novelty-stream" data-limit="18" id="novelties">
+  <div class="filters novelty-filters">
+    <input type="search" placeholder="Товар, бренд или стенд" aria-label="Поиск новинок">
+    <select data-field="kind" aria-label="Статус">
+      <option value="">Все статусы</option>
+      {% for key,label in phases.items() %}<option value="{{ key }}">{{ label }}</option>{% endfor %}
+    </select>
+    {% if halls %}<select data-field="halls" aria-label="Зал">
+      <option value="">Все залы</option>
+      {% for hall in halls %}<option value="{{ hall }}">Зал {{ hall }}</option>{% endfor %}
+    </select>{% endif %}
+    <select data-field="source" aria-label="Источник"><option value="">Все источники</option><option>Сайты</option><option>Telegram</option></select>
+    <button type="button" class="reset">Сбросить</button>
+  </div>
+  <div class="novelty-note">
+    <p class="result-count small muted" aria-live="polite">{{ items|length }} карточек</p>
+    <details class="source-note">
+      <summary>Как проверены новинки</summary>
+      <p>У подтверждённого показа есть публикация с выставки. У анонса есть заявление о предстоящем показе. Для новинок года указан стенд компании, на котором можно спросить о товаре.</p>
+      {% if novelty_scan.sites %}<p>При повторном обходе {{ novelty_scan.sites }} адресов из официального путеводителя получены HTML-страницы {{ novelty_scan.site_responses }} сайтов. Дополнительно открылись {{ novelty_scan.linked_page_responses }} из {{ novelty_scan.linked_pages }} связанных страниц. Карточки отобраны по первоисточникам.</p>{% endif %}
+    </details>
+  </div>
+  <div class="product-grid">
+  {% for x in items %}
+    {% set names=[] %}{% for pid in x.participant_ids %}{% set _=names.append(participant_map[pid].name) %}{% endfor %}
+    <article id="{{ x.id }}" class="product-card novelty-card filter-item" data-kind="{{ x.phase }}" data-halls="{{ x.halls_view|join(' | ') }}" data-source="{{ x.source_view }}"
+      data-search="{{ ([x.title,x.description,x.brand|default(''),' '.join(names),' '.join(x.stands_view),x.category|default('')]|join(' '))|lower }}">
+      {% if x.image_view %}<a href="{{ x.url }}" class="product-img novelty-photo" aria-label="Источник публикации о {{ x.title }}"><img loading="{% if loop.index <= 3 %}eager{% else %}lazy{% endif %}" decoding="async" src="{{ x.image_view }}" alt="{{ x.photo_label or x.title }}"></a>{% endif %}
+      <div class="novelty-body">
+        <p class="novelty-meta"><span class="novelty-status novelty-status-{{ x.phase }}">{{ phases[x.phase] }}</span>{% if x.category %}<span>{{ x.category }}</span>{% endif %}</p>
+        <h2>{{ x.title }}</h2>
+        {% if x.participant_ids %}<p class="novelty-location">
+          {% if x.stands_view %}<strong>{{ x.stands_view|join(' · ') }}</strong>{% endif %}
+          {% for pid in x.participant_ids %}<a href="{{ prefix }}{{ participant_map[pid].page }}">{{ x.brand or participant_map[pid].name }}</a>{% endfor %}
+        </p>{% endif %}
+        <p>{{ x.description }}</p>
+        {% if x.question %}<p class="novelty-question"><strong>Что уточнить</strong> {{ x.question }}</p>{% endif %}
+        <p class="small muted novelty-date">
+          {% if x.publication_day %}<time datetime="{{ x.publication_day }}">{{ x.publication_day|string|date_text }}</time>
+          {% elif x.period %}Коллекция {{ x.period }} года
+          {% elif x.phase == 'announced' %}Дата анонса не указана
+          {% endif %}
+        </p>
+        <div class="novelty-links">
+          <a href="{{ x.url }}">{{ 'Открыть пост в Telegram' if x.source_view == 'Telegram' else 'Открыть публикацию на сайте' }} ↗</a>
+          {% for source in x.sources[1:] %}{% if source.url != x.url %}<a href="{{ source.url }}">{{ source.title }} ↗</a>{% endif %}{% endfor %}
+          {% if x.photo_source and x.photo_source != x.url %}<a href="{{ x.photo_source }}">Источник фото ↗</a>{% endif %}
+        </div>
+      </div>
+    </article>
+  {% endfor %}
+  </div>
+  <p class="empty" hidden>По этим фильтрам ничего не найдено. Попробуйте другой запрос или сбросьте фильтры.</p>
+  <button type="button" class="btn more" hidden>Показать ещё</button>
+</section>
+{% endblock %}

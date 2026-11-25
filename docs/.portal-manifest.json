@@ -13,6 +13,14 @@
       "sha256": "8c85e813bd00fb7fbc5aefb29e2b3d9cb031b881f907491b8bbddd7931ff4218",
       "lastmod": "2026-11-22T07:06:18+00:00"
     },
+    "portal-assets/novelties.css": {
+      "sha256": "f55d52f2ea4429d413f9cbf6e6a3e5a8e72bb79d5106c080998c390f26cf1267",
+      "lastmod": "2026-11-25T06:44:33+00:00"
+    },
+    "portal-assets/novelties.js": {
+      "sha256": "75599a582cbd0d46fbeb154f4a10475c0b3e3874c2d76c3379712c7bf07fc09a",
+      "lastmod": "2026-11-25T06:44:33+00:00"
+    },
     "portal-assets/factory-feed.json": {
       "sha256": "beba83379e343f156625a706ffa7e3a0e7d442eef23d3a360aff9e8bf5da98ec",
       "lastmod": "2026-11-22T08:09:54+00:00"
@@ -2430,8 +2438,8 @@
       "lastmod": "2026-11-24T08:05:49+00:00"
     },
     "novelties.html": {
-      "sha256": "3f8422ab35efc59f8e11617559c74dec4de60e7e188f78db6ee77a99077f7770",
-      "lastmod": "2026-11-24T08:04:08+00:00"
+      "sha256": "fc236476191c34b5e028bba80fec2e78b1f08cfdeb9bee4f06507f7d8b0fd52a",
+      "lastmod": "2026-11-25T06:44:33+00:00"
     },
     "articles.html": {
       "sha256": "7294618b00fecb7ef77c6764bbeba6ad637d896ff9ec7779cb9af752ca9a9146",

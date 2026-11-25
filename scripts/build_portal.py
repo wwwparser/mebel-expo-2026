@@ -203,6 +203,47 @@ def load_rows(root, name):
     return rows
 
 
+NOVELTY_PHASES = {
+    'shown': 'Показ подтверждён',
+    'announced': 'Анонс на выставке',
+    'released': 'Новинка года',
+    'undated': 'Дата выпуска не указана',
+    'offsite': 'Вне выставочных залов',
+}
+
+
+def prepare_novelties(items, participants, edition_year, tz):
+    route = {}
+    for item in items:
+        stands = dict.fromkeys(
+            stand for pid in item.get('participant_ids', [])
+            for codes in participants[pid]['stands'] for stand in codes.split('/')
+        )
+        item['stands_view'] = item.get('stands', list(stands))
+        if set(item['stands_view']) - stands.keys():
+            raise ValueError(f'Unknown novelty stand: {item["id"]}')
+        publication = date_value(item.get('published_at'), tz)
+        item['publication_day'] = publication.date() if isinstance(publication, datetime) else publication
+        if item['id'] == 'tgpost-adilet_ul-883':
+            item['phase'] = 'offsite'
+            item['stands_view'] = []
+        item.setdefault('phase', 'announced' if item.get('expo') else
+                        'released' if publication and publication.year == edition_year else 'undated')
+        if item['phase'] not in NOVELTY_PHASES or item.get('photo_source') and not safe_url(item['photo_source']):
+            raise ValueError(f'Invalid novelty metadata: {item["id"]}')
+        item['halls_view'] = sorted({stand[:2] for stand in item['stands_view'] if re.fullmatch(r'\d{2}[A-Z]\d{3}', stand)})
+        item['source_view'] = 'Telegram' if item.get('source_type') == 'Telegram' else 'Сайты'
+        if item.get('featured'):
+            if not item['halls_view'] or item['phase'] not in ('shown', 'announced'):
+                raise ValueError(f'Invalid route stop: {item["id"]}')
+            route.setdefault(item['halls_view'][0], []).append(item)
+    phase_order = list(NOVELTY_PHASES)
+    # Keep each group in reverse publication order. Undated route stops also have in-page links.
+    items.sort(key=lambda item: (phase_order.index(item['phase']), not item.get('featured', False),
+                                 -(item['publication_day'] or date.min).toordinal()))
+    return dict(sorted(route.items()))
+
+
 def build(root=ROOT, output_override=None):
     root = Path(root).resolve()
     config = read_json(root / 'expo.json')
@@ -237,6 +278,12 @@ def build(root=ROOT, output_override=None):
         raise ValueError('Output directory overlaps project source')
 
     rows = {name: load_rows(root, name) for name in MODULES if name != 'map'}
+    if 'novelties' in selected:
+        launches = load_rows(root, 'website_launches')
+        superseded = {item['supersedes'] for item in launches if item.get('supersedes')}
+        if {item['id'] for item in launches} & {item['id'] for item in rows['novelties']}:
+            raise ValueError('Website launch ID duplicates a novelty ID')
+        rows['novelties'] = launches + [item for item in rows['novelties'] if item['id'] not in superseded]
     if not rows['participants']:
         raise ValueError('data/portal/participants.json must contain at least one participant; no legacy fallback')
     active = {name for name in selected if name == 'participants' or (config.get('scheme_url') if name == 'map' else (rows[name] or name == 'services'))}
@@ -374,6 +421,8 @@ def build(root=ROOT, output_override=None):
             if item.get('url') and not safe_url(item['url']):
                 raise ValueError(f'Unsafe {name} URL')
             item['image_view'] = asset(item.get('image'), out)
+    novelty_route = prepare_novelties(rows['novelties'], participant_map, start.year, tz)
+    novelty_scan = read_json(root / 'data/portal/novelty_scan.json', {})
     for article in rows['articles']:
         fragment = inside(root / 'data/portal', article.get('content_file'))
         article['html'] = fragment.read_text(encoding='utf-8')
@@ -480,6 +529,12 @@ def build(root=ROOT, output_override=None):
         context['event_schema']['url'] = config['official_url']
     favicon = b'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#223b32"/><text x="32" y="45" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="42" fill="#fffdf9">M</text></svg>'
     generated = {'portal-assets/style.css': style, 'portal-assets/portal.js': script, 'favicon.svg': favicon}
+    if 'novelties' in active:
+        for ext in ('css', 'js'):
+            asset_name = f'novelties.{ext}'
+            payload = (root / 'portal_web' / asset_name).read_text(encoding='utf-8').encode('utf-8')
+            generated[f'portal-assets/{asset_name}'] = payload
+            context[f'novelty_{ext}_version'] = digest(payload)[:16]
     if factory_feed:
         name = 'portal-assets/factory-feed.json'
         payload = json.dumps(factory_feed['posts'], ensure_ascii=False, separators=(',', ':')).encode('utf-8')
@@ -518,7 +573,14 @@ def build(root=ROOT, output_override=None):
         if name not in active or name == 'participants':
             continue
         template = 'services.html' if name == 'services' else (f'{name}.html' if name in ('people', 'program', 'posts', 'giveaways', 'articles', 'map', 'novelties') else 'listing.html')
-        render(MODULES[name][0], template, labels[name], module=name, items=rows.get(name, []))
+        extra = {}
+        if name == 'novelties':
+            items = rows[name]
+            extra = dict(novelty_year=start.year, novelty_scan=novelty_scan, novelty_route=novelty_route,
+                         phases={key: label for key, label in NOVELTY_PHASES.items() if any(x['phase'] == key for x in items)},
+                         halls=sorted({hall for x in items for hall in x['halls_view']}),
+                         description=f'Новинки участников за {start.year} год, выставочные анонсы и маршрут по стендам.')
+        render(MODULES[name][0], template, labels[name], module=name, items=rows.get(name, []), **extra)
     for article in rows['articles']:
         render(article['page'], 'article.html', article['title'], item=article, description=article.get('summary') or article['title'])
     generated['exports/participants.json'] = (json.dumps(participants, ensure_ascii=False, indent=2) + '\n').encode('utf-8')

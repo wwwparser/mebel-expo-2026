@@ -1,0 +1,640 @@
+[
+  {
+    "id": "web-nanxing",
+    "brand": "Nanxing",
+    "title": "Nanxing NB860E — кромкооблицовочный станок",
+    "description": "Компактный станок тяжёлого класса со стальной станиной и ременным прижимом. Nanxing назвал NB860E премьерой выставки, а после открытия сообщил о демонстрации модели на стенде.",
+    "category": "Оборудование",
+    "phase": "shown",
+    "question": "Попросите обработать вашу деталь и посмотрите качество шва на светлой кромке.",
+    "stands": [
+      "13D010"
+    ],
+    "participant_ids": [
+      "p-a326ce033e1d"
+    ],
+    "url": "https://nanxing.ru/news/nanxing-group-na-mebel-26/",
+    "checked_at": "2026-11-25",
+    "published_at": "2026-11-06",
+    "period": "",
+    "expo": true,
+    "source_type": "Сайт участника",
+    "sources": [
+      {
+        "title": "Сайт участника",
+        "url": "https://nanxing.ru/news/nanxing-group-na-mebel-26/"
+      },
+      {
+        "title": "Подтверждение показа в Telegram",
+        "url": "https://t.me/nanxingmac/1614"
+      },
+      {
+        "title": "Характеристики NB860E",
+        "url": "https://nanxing.ru/catalog/kromkooblitsovochnye-stanki/avtomaticheskie-s-servoperenastroykoy/nb860e-avtomaticheskiy-kromkooblitsovochnyy-stanok/"
+      }
+    ],
+    "featured": true
+  },
+  {
+    "id": "web-partnersoft",
+    "brand": "ПартнерСофт",
+    "title": "Orderix — облачная CRM для мебельного бизнеса",
+    "description": "В программе стенда ПартнерСофт заявлена демонстрация Orderix для работы с заказами на мебель.",
+    "category": "IT",
+    "phase": "announced",
+    "question": "Попросите провести один заказ от первого обращения до передачи в производство и уточните, как подключаются сайт и Авито.",
+    "stands": [
+      "13B032"
+    ],
+    "participant_ids": [
+      "p-5756c073b7ff"
+    ],
+    "url": "https://partnersoft.ru/mebel2026",
+    "checked_at": "2026-11-25",
+    "published_at": "",
+    "period": "",
+    "expo": true,
+    "source_type": "Сайт участника",
+    "sources": [
+      {
+        "title": "Сайт участника",
+        "url": "https://partnersoft.ru/mebel2026"
+      },
+      {
+        "title": "Анонс в Telegram",
+        "url": "https://t.me/partnersoft/75"
+      }
+    ],
+    "featured": true,
+    "supersedes": "tgpost-partnersoft-75",
+    "image": "media/tg/44af3624e1223bda759f1096.webp",
+    "photo_source": "https://t.me/partnersoft/75",
+    "photo_label": "Иллюстрация из анонса"
+  },
+  {
+    "id": "web-fabrikod",
+    "brand": "ФАБРИКОД",
+    "title": "ФАБРИКОД — 3D-конфигуратор мебели с расчётом цены",
+    "description": "Конфигуратор Visual CPQ позволяет задать размеры шкафа и пересчитать цену. В публикации о выставке команда приглашает попробовать его на стенде и показывает, как результат передают в производство.",
+    "category": "IT",
+    "phase": "announced",
+    "question": "Возьмите типовой шкаф и попросите показать, что увидит покупатель на сайте и какие данные получит цех.",
+    "stands": [
+      "15B094"
+    ],
+    "participant_ids": [
+      "p-c5ab0b69bb3b"
+    ],
+    "url": "https://fabrikod.ru/solutions/visual-cpq",
+    "checked_at": "2026-11-25",
+    "published_at": "",
+    "period": "",
+    "expo": true,
+    "source_type": "Сайт участника",
+    "sources": [
+      {
+        "title": "Сайт участника",
+        "url": "https://fabrikod.ru/solutions/visual-cpq"
+      },
+      {
+        "title": "Приглашение на стенд в Telegram",
+        "url": "https://t.me/fabrikod/36"
+      }
+    ],
+    "featured": true,
+    "photo_label": "Иллюстрация интерфейса Visual CPQ",
+    "image": "media/novelties/web-fabrikod.webp",
+    "photo_source": "https://fabrikod.ru/_next/image?url=%2Ffabrikod%2Fvisual-cpq-hero-red.webp&w=3840&q=75"
+  },
+  {
+    "id": "web-liga",
+    "brand": "ЛИГА",
+    "title": "ЛИГА — фасад с интегрированной ручкой",
+    "description": "ЛИГА анонсировала цикл изготовления фасада с интегрированной ручкой: фрезерование на KDT, облицовку сложного профиля на BRAMEK и окраску на PURETE. В анонсе названа технология ZOYA.",
+    "category": "Оборудование",
+    "phase": "announced",
+    "question": "Попросите готовый образец и проверьте качество отделки внутри ручки. Уточните, какие операции можно внедрить по отдельности.",
+    "stands": [
+      "13F010"
+    ],
+    "participant_ids": [
+      "p-2449608697eb"
+    ],
+    "url": "https://ligamac.ru/o-kompanii/novosti/meropriyatiya/liga-na-mebel-2026-novye-vozmozhnosti-fasadnogo-proizvodstva/",
+    "checked_at": "2026-11-25",
+    "published_at": "2026-11-16",
+    "period": "",
+    "expo": true,
+    "source_type": "Сайт участника",
+    "sources": [
+      {
+        "title": "Сайт участника",
+        "url": "https://ligamac.ru/o-kompanii/novosti/meropriyatiya/liga-na-mebel-2026-novye-vozmozhnosti-fasadnogo-proizvodstva/"
+      }
+    ],
+    "featured": true,
+    "image": "media/novelties/web-liga.webp",
+    "photo_source": "https://ligamac.ru/upload/iblock/f6a/e4rlyd7nfwiwq6q7jhqfr5w6lykdx8h0.png",
+    "photo_label": "Образцы фасадов на иллюстрации ЛИГА"
+  },
+  {
+    "id": "web-hold",
+    "brand": "Интервесп",
+    "title": "HOLD HD771J и HB61J — кромление и присадка",
+    "description": "Интервесп перечислил в программе салона ЛДМ кромкооблицовочный HD771J и сверлильно-присадочный HB61J.",
+    "category": "Оборудование",
+    "phase": "announced",
+    "question": "Уточните, можно ли принести свои заготовки для пробной обработки.",
+    "stands": [
+      "13C010"
+    ],
+    "participant_ids": [
+      "p-766db661b885"
+    ],
+    "url": "https://intervesp.ru/news/vstretimsya-na-vystavke-mebel-2026-priglashaem-na-stend-intervesp-v-salone-oborudovaniya-ldm/",
+    "checked_at": "2026-11-25",
+    "published_at": "2026-10-12",
+    "period": "",
+    "expo": true,
+    "source_type": "Сайт участника",
+    "sources": [
+      {
+        "title": "Сайт участника",
+        "url": "https://intervesp.ru/news/vstretimsya-na-vystavke-mebel-2026-priglashaem-na-stend-intervesp-v-salone-oborudovaniya-ldm/"
+      }
+    ]
+  },
+  {
+    "id": "web-kami-excitech",
+    "brand": "КАМИ",
+    "title": "Excitech 736 SERVO PUR M BELT — кромление с EVA и PUR",
+    "description": "КАМИ анонсировала кромкооблицовочный станок с ременным прижимом, клеевой системой для EVA и PUR и автоматической сменой кромки.",
+    "category": "Оборудование",
+    "phase": "announced",
+    "question": "Попросите показать переход с одного клея на другой и оцените, сколько времени занимает переналадка.",
+    "stands": [
+      "13D030"
+    ],
+    "participant_ids": [
+      "p-1a834ce5d87c"
+    ],
+    "url": "https://www.stanki.ru/about/news/detail/28_10_2026_10197090/",
+    "checked_at": "2026-11-25",
+    "published_at": "2026-10-29",
+    "period": "",
+    "expo": true,
+    "source_type": "Сайт участника",
+    "sources": [
+      {
+        "title": "Сайт участника",
+        "url": "https://www.stanki.ru/about/news/detail/28_10_2026_10197090/"
+      }
+    ],
+    "photo_source": "https://www.stanki.ru/upload/resize_cache/iblock/559/1200_800_17236f3bb137eb253405d06e58cacf26c/width_1000_height_407_fee53i385zaoeznz531w8xu4njwpucac.jpg",
+    "image": "media/novelties/web-kami-excitech.webp"
+  },
+  {
+    "id": "web-kami-filatodigi",
+    "brand": "КАМИ",
+    "title": "Filato DIGICUT 1625 B33 — раскрой, фрезеровка и присадка",
+    "description": "В анонсе КАМИ модель названа универсальным центром для трёх операций на одной установке.",
+    "category": "Оборудование",
+    "phase": "announced",
+    "question": "Возьмите схему детали с отверстиями и попросите оценить время обработки и ограничения по материалам.",
+    "stands": [
+      "13D030"
+    ],
+    "participant_ids": [
+      "p-1a834ce5d87c"
+    ],
+    "url": "https://www.stanki.ru/about/news/detail/28_10_2026_10197090/",
+    "checked_at": "2026-11-25",
+    "published_at": "2026-10-29",
+    "period": "",
+    "expo": true,
+    "source_type": "Сайт участника",
+    "sources": [
+      {
+        "title": "Сайт участника",
+        "url": "https://www.stanki.ru/about/news/detail/28_10_2026_10197090/"
+      }
+    ],
+    "photo_source": "https://www.stanki.ru/upload/resize_cache/iblock/eed/1200_800_17236f3bb137eb253405d06e58cacf26c/width_950_height_800_d8egf7wz0pbd5vaggtk86t9wl6pcqazf.jpg",
+    "image": "media/novelties/web-kami-filatodigi.webp"
+  },
+  {
+    "id": "web-bplanner",
+    "brand": "BPlanner · Топ Фасад",
+    "title": "BPlanner «Бобёр» — ИИ-помощник для мебельщика",
+    "description": "BPlanner объявил демонстрацию ИИ-помощника «Бобёр» и работы с производственными расширениями на стенде компании «Топ Фасад».",
+    "category": "IT",
+    "phase": "announced",
+    "question": "Попросите показать, что помощник умеет на примере вашей задачи, и уточните, что входит в тариф.",
+    "stands": [
+      "13B015"
+    ],
+    "participant_ids": [
+      "p-8db29e082423"
+    ],
+    "url": "https://bplanner.me/forum/topic/polnym-hodom-idet-podgotovka-k-vystavke-v-moskve-mebel-2026-s-23-po-26-nojabrja/",
+    "checked_at": "2026-11-25",
+    "published_at": "",
+    "period": "",
+    "expo": true,
+    "source_type": "Сайт участника",
+    "sources": [
+      {
+        "title": "Сайт участника",
+        "url": "https://bplanner.me/forum/topic/polnym-hodom-idet-podgotovka-k-vystavke-v-moskve-mebel-2026-s-23-po-26-nojabrja/"
+      }
+    ]
+  },
+  {
+    "id": "web-mdm-pre",
+    "brand": "МДМ",
+    "title": "MAIBO AURA, ЭСЕНТА и ЭВО — наполнение кухни и гардеробной",
+    "description": "МДМ анонсировала кухонное наполнение MAIBO AURA и системы для гардеробных ЭСЕНТА и ЭВО.",
+    "category": "Фурнитура",
+    "phase": "announced",
+    "question": "Проверьте ход механизмов и попросите монтажную схему под ширину вашего корпуса.",
+    "stands": [
+      "14D030"
+    ],
+    "participant_ids": [
+      "p-be6c66807f00"
+    ],
+    "url": "https://www.mdm-complect.ru/news/novye-resheniya-dlya-vashey-mebeli-prikhodite-na-stend-mdm-na-mebel-2026-/",
+    "checked_at": "2026-11-25",
+    "published_at": "2026-11-05",
+    "period": "",
+    "expo": true,
+    "source_type": "Сайт участника",
+    "sources": [
+      {
+        "title": "Сайт участника",
+        "url": "https://www.mdm-complect.ru/news/novye-resheniya-dlya-vashey-mebeli-prikhodite-na-stend-mdm-na-mebel-2026-/"
+      }
+    ],
+    "featured": true
+  },
+  {
+    "id": "web-higold",
+    "brand": "Higold",
+    "title": "Higold Star Move 2.0 — опускаемая корзина с сенсором",
+    "description": "Higold включил в программу стенда систему для верхних кухонных шкафов. Корзина опускается по команде с сенсорной панели.",
+    "category": "Фурнитура",
+    "phase": "announced",
+    "question": "Проверьте работу механизма под нагрузкой и уточните требования к электропитанию и размерам модуля.",
+    "stands": [
+      "14C130"
+    ],
+    "participant_ids": [
+      "p-d47b8c41ce58"
+    ],
+    "url": "https://higoldrus.ru/news/vystavki-i-sobytiya/higold-na-vystavke-mebel-2026/",
+    "checked_at": "2026-11-25",
+    "published_at": "2026-10-26",
+    "period": "",
+    "expo": true,
+    "source_type": "Сайт участника",
+    "sources": [
+      {
+        "title": "Сайт участника",
+        "url": "https://higoldrus.ru/news/vystavki-i-sobytiya/higold-na-vystavke-mebel-2026/"
+      }
+    ]
+  },
+  {
+    "id": "web-tbm-agt",
+    "brand": "ТБМ · AGT",
+    "title": "AGT Trendy — новые матовые декоры",
+    "description": "ТБМ сообщил о новых цветах матовых панелей AGT Trendy для выставки. В предвыставочной публикации компания также описывает поверхности soft touch и металлизированные декоры.",
+    "category": "Материалы",
+    "phase": "announced",
+    "question": "Попросите образцы декоров и соответствующей кромки. Сравните их при тёплом и нейтральном свете.",
+    "stands": [
+      "14C030"
+    ],
+    "participant_ids": [
+      "p-47493df4c137"
+    ],
+    "url": "https://www.tbm.ru/about/news/tbm-i-agt-kak-proslo-znakomstvo-mebelshhikov-s-proizvodstvom",
+    "checked_at": "2026-11-25",
+    "published_at": "2026-10-01",
+    "period": "",
+    "expo": true,
+    "source_type": "Сайт участника",
+    "sources": [
+      {
+        "title": "Сайт участника",
+        "url": "https://www.tbm.ru/about/news/tbm-i-agt-kak-proslo-znakomstvo-mebelshhikov-s-proizvodstvom"
+      },
+      {
+        "title": "Подборка ТБМ перед выставкой",
+        "url": "https://www.tbm.ru/about/news/tbm-i-agt-developing-together"
+      }
+    ],
+    "featured": true,
+    "supersedes": "tgpost-mebclub-6710"
+  },
+  {
+    "id": "web-kav",
+    "brand": "Мебельные Решения · KAV",
+    "title": "KAV — мебельная фурнитура и направляющие",
+    "description": "Торговый дом «Мебельные Решения» включил бренд KAV в список новинок своего стенда.",
+    "category": "Фурнитура",
+    "phase": "announced",
+    "question": "Попросите собрать ящик на направляющих KAV и уточните, какие типоразмеры есть в наличии.",
+    "stands": [
+      "14C170"
+    ],
+    "participant_ids": [
+      "p-2c7e1ec5a314"
+    ],
+    "url": "https://mebelre.ru/company/news/mebelnye-resheniya-priglashayut-na-vystavku-mebel-2026/",
+    "checked_at": "2026-11-25",
+    "published_at": "2026-09-23",
+    "period": "",
+    "expo": true,
+    "source_type": "Сайт участника",
+    "sources": [
+      {
+        "title": "Сайт участника",
+        "url": "https://mebelre.ru/company/news/mebelnye-resheniya-priglashayut-na-vystavku-mebel-2026/"
+      }
+    ],
+    "supersedes": "tgpost-mebelre-70",
+    "image": "media/tg/ef68383f7cfbc4a5ca6702f3.webp",
+    "photo_source": "https://t.me/mebelre/70",
+    "photo_label": "Иллюстрация из анонса"
+  },
+  {
+    "id": "web-mebax",
+    "brand": "Мебакс",
+    "title": "Мебакс — шкафное наполнение с отделкой экокожей",
+    "description": "На странице для посетителей выставки Мебакс представил новую коллекцию наполнения в сером и шоколадном цветах.",
+    "category": "Фурнитура",
+    "phase": "announced",
+    "question": "Посмотрите отделку вблизи и уточните, какие элементы совместимы с вашим шкафом.",
+    "stands": [
+      "14D085"
+    ],
+    "participant_ids": [
+      "p-6803a7f10d08"
+    ],
+    "url": "https://napolnenie-mebax.ru/",
+    "checked_at": "2026-11-25",
+    "published_at": "",
+    "period": "",
+    "expo": true,
+    "source_type": "Сайт участника",
+    "sources": [
+      {
+        "title": "Сайт участника",
+        "url": "https://napolnenie-mebax.ru/"
+      }
+    ]
+  },
+  {
+    "id": "web-fourtex",
+    "brand": "Boyteks · Фортекс",
+    "title": "Boyteks — охлаждающие ткани для матрасов",
+    "description": "Партнёр «Фортекс» включил в программу стенда ткани для матрасов с охлаждающими и терморегулирующими свойствами.",
+    "category": "Материалы",
+    "phase": "announced",
+    "question": "Попросите образцы и протоколы испытаний. Сравните свойства до стирки и после неё.",
+    "stands": [
+      "15D080"
+    ],
+    "participant_ids": [
+      "p-e198b3c2add7"
+    ],
+    "url": "https://fourtex.ru/news/forteks-priglashaet-na-vystavku-mebel-2026/",
+    "checked_at": "2026-11-25",
+    "published_at": "2026-11-09",
+    "period": "",
+    "expo": true,
+    "source_type": "Сайт партнёра",
+    "sources": [
+      {
+        "title": "Сайт партнёра",
+        "url": "https://fourtex.ru/news/forteks-priglashaet-na-vystavku-mebel-2026/"
+      }
+    ]
+  },
+  {
+    "id": "web-destyle",
+    "brand": "DeStyle",
+    "title": "DeStyle — новые модели мягкой мебели",
+    "description": "Производитель заявил новые модели мягкой мебели и возможность посмотреть варианты обивки на стенде. Названия моделей в анонсе не приведены.",
+    "category": "Мебель",
+    "phase": "announced",
+    "question": "Спросите, какие модели впервые показывают на выставке, и попробуйте механизм раскладывания.",
+    "stands": [
+      "15C110"
+    ],
+    "participant_ids": [
+      "p-0125f005b76b"
+    ],
+    "url": "https://destyle.by/novosti/destyle-mebel-2026/",
+    "checked_at": "2026-11-25",
+    "published_at": "2026-10-22",
+    "period": "",
+    "expo": true,
+    "source_type": "Сайт участника",
+    "sources": [
+      {
+        "title": "Сайт участника",
+        "url": "https://destyle.by/novosti/destyle-mebel-2026/"
+      }
+    ],
+    "featured": true
+  },
+  {
+    "id": "web-mcity",
+    "brand": "М-Сити · DISAUR",
+    "title": "М-Сити · DISAUR — стол Marzio с раскладкой до 360 см",
+    "description": "В коллекции 2026 года девять столов и пять стульев. У Marzio две независимые вставки по 60 см, матовая керамика на закалённом стекле и длина от 240 до 360 см.",
+    "category": "Мебель",
+    "phase": "released",
+    "question": "Уточните, есть ли Marzio на стенде. Если есть, попросите разложить стол одному человеку.",
+    "stands": [
+      "14E150"
+    ],
+    "participant_ids": [
+      "p-8c64cb283bcc"
+    ],
+    "url": "https://mebelcity.com/blog/kollektsii/novaya-kollektsiya-2026/",
+    "checked_at": "2026-11-25",
+    "published_at": "",
+    "period": "2026",
+    "expo": false,
+    "source_type": "Сайт участника",
+    "sources": [
+      {
+        "title": "Сайт участника",
+        "url": "https://mebelcity.com/blog/kollektsii/novaya-kollektsiya-2026/"
+      },
+      {
+        "title": "Анонс стенда",
+        "url": "https://mebelcity.com/blog/mebelnye-vystavki/mebel-2026/"
+      },
+      {
+        "title": "Фото и характеристики Marzio",
+        "url": "https://mebelcity.com/catalog/stoly/keramicheskie_stoly/65031/"
+      }
+    ],
+    "photo_source": "https://mebelcity.com/upload/dev2fun.imagecompress/webp/iblock/006/d6m9h0dwg0wf1trvqw7tsjzfgsogljxl.webp",
+    "image": "media/novelties/web-mcity.webp"
+  },
+  {
+    "id": "web-bts-nice",
+    "brand": "BTS",
+    "title": "BTS «Ницца» ГС-03 — отделка «графит / мрамор золотой»",
+    "description": "BTS выпустила новый декор для гостиной «Ницца» ГС-03. Контрастный рисунок мрамора сочетается с графитовыми поверхностями.",
+    "category": "Мебель",
+    "phase": "released",
+    "question": "Уточните, есть ли на стенде образец MF15 и можно ли получить фото и габариты для карточки магазина.",
+    "stands": [
+      "15B060"
+    ],
+    "participant_ids": [
+      "p-458b1ecfffdb"
+    ],
+    "url": "https://btsmebel.ru/article/novinka-gostinaya-nicca-gs-03-v-cvete-grafit-mramor-zolotoj-mf15/",
+    "checked_at": "2026-11-25",
+    "published_at": "2026-08-12",
+    "period": "",
+    "expo": false,
+    "source_type": "Сайт участника",
+    "sources": [
+      {
+        "title": "Сайт участника",
+        "url": "https://btsmebel.ru/article/novinka-gostinaya-nicca-gs-03-v-cvete-grafit-mramor-zolotoj-mf15/"
+      }
+    ],
+    "supersedes": "nice",
+    "photo_source": "https://btsmebel.ru/u/ckupload/files/%D0%9D%D0%B8%D1%86%D1%86%D0%B0-%D0%BC%D1%80%D0%B0%D0%BC%D0%BE%D1%80-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%8C%D0%B5%D1%80-1.jpg",
+    "image": "media/novelties/web-bts-nice.webp"
+  },
+  {
+    "id": "web-bts-emilia",
+    "brand": "BTS",
+    "title": "BTS «Эмилия» КР-18 — кровать с мягкой обивкой",
+    "description": "Кровать со спальным местом 160 × 200 см, мягким изголовьем, изножьем и царгами. Компания опубликовала несколько вариантов ткани.",
+    "category": "Мебель",
+    "phase": "released",
+    "question": "Уточните варианты основания, упаковочные габариты и какие цвета реально заказывать небольшими партиями.",
+    "stands": [
+      "15B060"
+    ],
+    "participant_ids": [
+      "p-458b1ecfffdb"
+    ],
+    "url": "https://btsmebel.ru/article/novinka-krovat-1-6-m-emiliya-kr-18/",
+    "checked_at": "2026-11-25",
+    "published_at": "2026-07-28",
+    "period": "",
+    "expo": false,
+    "source_type": "Сайт участника",
+    "sources": [
+      {
+        "title": "Сайт участника",
+        "url": "https://btsmebel.ru/article/novinka-krovat-1-6-m-emiliya-kr-18/"
+      }
+    ],
+    "photo_source": "https://btsmebel.ru/u/ckupload/files/%D0%9C%D0%B0%D1%80%D0%B5%D0%BD%D0%B3%D0%BE-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%8C%D0%B5%D1%80-4.jpg",
+    "image": "media/novelties/web-bts-emilia.webp"
+  },
+  {
+    "id": "web-bts-pandora",
+    "brand": "BTS",
+    "title": "BTS «Пандора» — модульная серия в графите и базальте",
+    "description": "Новый цвет MF32 для коллекции модульной мебели. В ассортименте серии есть комод, пенал и модули для прихожей.",
+    "category": "Мебель",
+    "phase": "released",
+    "question": "Попросите спецификацию модулей и варианты комбинирования для разных размеров прихожей.",
+    "stands": [
+      "15B060"
+    ],
+    "participant_ids": [
+      "p-458b1ecfffdb"
+    ],
+    "url": "https://btsmebel.ru/article/novinka-modul-naya-kollekciya-pandora-v-cvete-grafit-bazal-t-mf32/",
+    "checked_at": "2026-11-25",
+    "published_at": "2026-07-27",
+    "period": "",
+    "expo": false,
+    "source_type": "Сайт участника",
+    "sources": [
+      {
+        "title": "Сайт участника",
+        "url": "https://btsmebel.ru/article/novinka-modul-naya-kollekciya-pandora-v-cvete-grafit-bazal-t-mf32/"
+      }
+    ],
+    "photo_source": "https://btsmebel.ru/u/ckupload/files/%D0%9F%D0%B0%D0%BD%D0%B4%D0%BE%D1%80%D0%B0-%D0%A8%D0%9A%D0%9D-08-%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D1%82-%D0%B1%D0%B0%D0%B7%D0%B0%D0%BB%D1%8C%D1%82-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%8C%D0%B5%D1%80-1.jpg",
+    "image": "media/novelties/web-bts-pandora.webp"
+  },
+  {
+    "id": "web-reglament",
+    "brand": "Регламент · МФ Комод",
+    "title": "«Регламент С» — ученические столы на металлическом каркасе",
+    "description": "В июне «Регламент» представил парты с усиленным каркасом и цветными вставками.",
+    "category": "Мебель",
+    "phase": "released",
+    "question": "Уточните доступные ростовые группы и условия пробной поставки для учебного центра.",
+    "stands": [
+      "14F010"
+    ],
+    "participant_ids": [
+      "p-a72edc96a430"
+    ],
+    "url": "https://reglament-nn.ru/novinka-uchenicheskie-stoly-reglament-s",
+    "checked_at": "2026-11-25",
+    "published_at": "2026-06-05",
+    "period": "",
+    "expo": false,
+    "source_type": "Сайт участника",
+    "sources": [
+      {
+        "title": "Сайт участника",
+        "url": "https://reglament-nn.ru/novinka-uchenicheskie-stoly-reglament-s"
+      }
+    ],
+    "image": "media/novelties/web-reglament.webp",
+    "photo_source": "https://reglament-nn.ru/sites/default/files/2026-07/-fEtUWuDYSMuOnomms6KTUagIalR8pZX5Q5WWF3mUIY1umNuFV5yP2Kj29zX24KsdnVtlsHJ5ZNf8edCevAkpsX9.jpg"
+  },
+  {
+    "id": "web-premial",
+    "brand": "Premial",
+    "title": "Premial LARGO — посудосушитель для нижней базы 600 мм",
+    "description": "Новое исполнение LARGO рассчитано на монтаж в нижнем кухонном модуле шириной 600 мм.",
+    "category": "Фурнитура",
+    "phase": "released",
+    "question": "Попросите схему установки и уточните требования к глубине корпуса.",
+    "stands": [
+      "14C070"
+    ],
+    "participant_ids": [
+      "p-0ee70b8e8524"
+    ],
+    "url": "https://premial-furniture.ru/news/novinka-posudosushitel-largo-v-nizhnyuyu-bazu-600-mm/",
+    "checked_at": "2026-11-25",
+    "published_at": "2026-02-16",
+    "period": "",
+    "expo": false,
+    "source_type": "Сайт участника",
+    "sources": [
+      {
+        "title": "Сайт участника",
+        "url": "https://premial-furniture.ru/news/novinka-posudosushitel-largo-v-nizhnyuyu-bazu-600-mm/"
+      },
+      {
+        "title": "Архив новостей с датой",
+        "url": "https://premial-furniture.ru/news/"
+      }
+    ],
+    "photo_source": "https://premial-furniture.ru/wp-content/uploads/2026/02/new-posudosushiteli-largo.jpg",
+    "image": "media/novelties/web-premial.webp"
+  }
+]

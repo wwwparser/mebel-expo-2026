@@ -20,7 +20,8 @@ def create(destination):
         raise ValueError('Synthetic fixture must be outside the template directory')
     if destination.exists() and any(destination.iterdir()):
         raise ValueError('Fixture destination must be empty')
-    shutil.copytree(ROOT, destination, dirs_exist_ok=True, ignore=shutil.ignore_patterns('__pycache__', '.venv', 'docs', '.env'))
+    shutil.copytree(ROOT, destination, dirs_exist_ok=True, ignore=shutil.ignore_patterns(
+        '__pycache__', '.venv', 'docs', '.env', 'website_launches.json', 'novelty_scan.json'))
     data = destination / 'data/portal'
     media = destination / 'docs/media'
     media.mkdir(parents=True, exist_ok=True)
