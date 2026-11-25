@@ -432,6 +432,17 @@ def build(root=ROOT, output_override=None):
     labels = {key: value[1] for key, value in MODULES.items()}
     labels.update(config.get('labels', {}))
     nav = [('index.html', 'Главная')] + [(MODULES[k][0], labels[k]) for k in MODULES if k in active]
+    visit_plan = load_rows(root, 'visit_plan') if config.get('visit_plan') else []
+    if visit_plan:
+        nav.insert(1, ('visit-plan.html', 'Маршрут'))
+        for section in visit_plan:
+            links = section['links'] + [block['link'] for block in section['blocks'] if 'link' in block]
+            for link in links:
+                url = link['url']
+                path, fragment_marker, fragment = url.partition('#')
+                if not (safe_url(url) or (local_path(path) and
+                       (not fragment_marker or re.fullmatch(r'[\w-]+', fragment)))):
+                    raise ValueError(f'Unsafe visit plan link: {url!r}')
     speaker_items, business_guides, promotions = [], [], []
     telegram_refresh = read_json(root / 'data/portal/telegram_refresh.json', {}) if journal else {}
     opportunity_guides = []
@@ -529,6 +540,10 @@ def build(root=ROOT, output_override=None):
         context['event_schema']['url'] = config['official_url']
     favicon = b'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#223b32"/><text x="32" y="45" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="42" fill="#fffdf9">M</text></svg>'
     generated = {'portal-assets/style.css': style, 'portal-assets/portal.js': script, 'favicon.svg': favicon}
+    if visit_plan:
+        route_styles = (root / 'portal_web/visit-plan.css').read_text(encoding='utf-8').encode('utf-8')
+        generated['portal-assets/visit-plan.css'] = route_styles
+        context['visit_plan_css_version'] = digest(route_styles)[:16]
     if 'novelties' in active:
         for ext in ('css', 'js'):
             asset_name = f'novelties.{ext}'
@@ -559,6 +574,9 @@ def build(root=ROOT, output_override=None):
         for guide in business_guides:
             render(f"business/{guide['id']}.html", 'business.html', guide['title'], guide=guide)
     render('index.html', 'index.html', 'Навигатор выставки')
+    if visit_plan:
+        render('visit-plan.html', 'visit-plan.html', 'Маршрут посещения', sections=visit_plan,
+               description='План посещения выставки. Стенды IT и маркетинга, встречи с фабриками и расписание обхода.')
     render('catalog.html', 'catalog.html', labels['participants'],
            countries=sorted({p['country'] for p in participants if p['country']}),
            categories=sorted({v for p in participants for v in p['categories']}),

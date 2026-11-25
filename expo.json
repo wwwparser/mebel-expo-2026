@@ -13,6 +13,7 @@
   "checked_at": "2026-11-16",
   "business_updated": "2026-11-23",
   "output_dir": "docs",
+  "visit_plan": true,
   "modules": [
     "participants",
     "program",

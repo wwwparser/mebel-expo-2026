@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block page_styles %}<link rel="stylesheet" href="{{ prefix }}portal-assets/visit-plan.css?v={{ visit_plan_css_version }}">{% endblock %}
+{% block body %}
+<div class="visit-plan" id="visit-plan-top">
+  <header class="edition-head visit-head">
+    <p class="kicker">{{ config.brand_name or config.edition }}</p>
+    <h1>Маршрут посещения</h1>
+    <p>{{ config.place }}. Сначала IT-стенды, затем встречи с поставщиками и новинки.</p>
+  </header>
+  <nav class="visit-jumps" aria-label="Разделы маршрута">
+    <ul>{% for section in sections %}
+      <li><a href="#{{ section.id }}">{{ section.menu }}</a></li>
+    {% endfor %}{% if 'map' in enabled %}
+      <li><a href="{{ prefix }}map.html">Схема выставки ↗</a></li>
+    {% endif %}</ul>
+  </nav>
+
+  {% for section in sections %}
+  <section class="visit-section" id="{{ section.id }}" aria-labelledby="{{ section.id }}-title">
+    <header class="visit-section-head">
+      <h2 id="{{ section.id }}-title">{{ section.title }}</h2>
+      <p>{{ section.intro }}</p>
+    </header>
+    <div class="visit-blocks">
+    {% for block in section.blocks %}
+      {% if block.kind == 'stop' %}
+      <article class="card visit-stop">
+        <header>
+          <h3>{{ block.title }}</h3>
+          <ul class="visit-stands" aria-label="Стенды">
+            {% for stand in block.stands %}<li>{{ stand }}</li>{% endfor %}
+          </ul>
+        </header>
+        <p>{{ block.description }}</p>
+        <p class="visit-question"><strong>На месте.</strong> {{ block.question }}</p>
+        <a class="visit-source" href="{{ block.link.url }}">{{ block.link.label }} ↗</a>
+      </article>
+      {% elif block.kind == 'event' %}
+      <article class="visit-event">
+        <p class="visit-time">{{ block.time }}</p>
+        <div><h3>{{ block.title }}</h3><p>{{ block.description }}</p></div>
+      </article>
+      {% elif block.kind == 'heading' %}
+      <h3 class="visit-subhead">{{ block.title }}</h3>
+      {% elif block.kind == 'panel' %}
+      <aside class="card visit-note"><h3>{{ block.title }}</h3><p>{{ block.description }}</p></aside>
+      {% endif %}
+    {% endfor %}
+    </div>
+    <footer class="visit-section-links">
+      {% for link in section.links %}<a href="{{ link.url }}">{{ link.label }} ↗</a>{% endfor %}
+      <a href="#visit-plan-top">К началу ↑</a>
+    </footer>
+  </section>
+  {% endfor %}
+</div>
+{% endblock %}
