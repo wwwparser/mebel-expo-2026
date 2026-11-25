@@ -6,10 +6,12 @@
 {% endmacro %}
 {% macro post(p,prefix,participant_map,person_map) %}
 {% set tags=[] %}{% for id in p.get('participant_ids',[]) if id in participant_map %}{% set c=participant_map[id] %}{% set _=tags.append(c.name+' '+' '.join(c.stands)) %}{% endfor %}{% for id in p.get('people_ids',[]) if id in person_map %}{% set _=tags.append(person_map[id].name) %}{% endfor %}
-<article class="post filter-item" data-subject="{{ 'О выставке' if p.is_current_expo }} | {{ 'С фотографиями' if p.photos_view }}" data-search="{{ (p.channel.title+' '+p.excerpt+' '+' '.join(tags))|lower }}">
+{% for company in p.get('exhibitors',[]) %}{% set _=tags.append(company.name) %}{% endfor %}
+<article class="post filter-item" data-subject="{{ 'О выставке' if p.is_current_expo }} | {{ 'С фотографиями' if p.photos_view }}" data-years="{{ p.get('edition_years',[])|join(' | ') }}" data-channel="{{ p.get('handle','') }}" data-search="{{ (p.channel.title+' '+p.excerpt+' '+' '.join(tags)+' '+p.get('handle',''))|lower }}">
  <div class="post-who"><a href="{{ p.channel.url }}">{{ p.channel.title }}</a>{% if p.is_current_expo %}<span class="tag">О выставке</span>{% endif %}</div>
  {% if p.photos_view %}<a href="{{ p.url }}" class="post-preview"><img loading="lazy" decoding="async" src="{{ '' if p.photos_view[0].startswith('http') else prefix }}{{ p.photos_view[0] }}" alt="Иллюстрация к публикации {{ p.channel.title }}">{% if p.get('preview_kind')=='video_preview' %}<span>Видео в Telegram ↗</span>{% elif p.photos_view|length>1 %}<span>Альбом · {{ p.photos_view|length }}</span>{% endif %}</a>{% endif %}
  <div class="post-content">{% if p.get('channel_attribution', '').startswith('Канал организации') %}<span class="topic">Авторская публикация в канале бюро</span>{% endif %}{% if p.analysis_label %}<span class="topic">{{ p.analysis_label }}</span>{% endif %}<p>{{ p.excerpt or 'Публикация без текстовой подписи.' }}</p>{{ linked(p,prefix,participant_map,person_map) }}
+ {% if p.get('exhibitors') %}<div class="links">{% for company in p.exhibitors %}<a class="chip" href="{{ prefix }}catalog.html#{{ company.id }}">{{ company.name }} · {{ company.years|join(' / ') }}</a>{% endfor %}</div>{% endif %}
  <div class="post-footer"><time datetime="{{ p.published_at }}">{{ p.published_at|date_text }}</time><a href="{{ p.url }}" aria-label="Открыть публикацию {{ p.channel.title }} в Telegram">Оригинал ↗</a></div>
  {% if p.analysis_status=='Разбор ожидается' %}<small class="muted">{{ p.analysis_status }}</small>{% endif %}</div></article>
 {% endmacro %}

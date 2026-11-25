@@ -12,6 +12,7 @@ import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from pathlib import Path
+from threading import local
 from urllib.parse import urlparse
 
 import requests
@@ -24,20 +25,23 @@ UA = "Mozilla/5.0 (compatible; MebelExpoPublicSnapshot/1.0)"
 MAX_IMAGE_BYTES = 12_000_000
 MAX_HTML_BYTES = 8_000_000
 TIMEOUT = (8, 25)
+THREAD = local()
 
 
 def get(url: str, limit: int) -> requests.Response:
-    r = requests.get(url, headers={"User-Agent": UA}, timeout=TIMEOUT, stream=True)
-    r.raise_for_status()
-    chunks, size = [], 0
-    for chunk in r.iter_content(65536):
-        size += len(chunk)
-        if size > limit:
-            r.close()
-            raise ValueError(f"response exceeds byte limit ({limit})")
-        chunks.append(chunk)
-    r._content = b"".join(chunks)
-    return r
+    if not hasattr(THREAD, "session"):
+        THREAD.session = requests.Session()
+        THREAD.session.headers["User-Agent"] = UA
+    with THREAD.session.get(url, timeout=TIMEOUT, stream=True) as r:
+        r.raise_for_status()
+        chunks, size = [], 0
+        for chunk in r.iter_content(65536):
+            size += len(chunk)
+            if size > limit:
+                raise ValueError(f"response exceeds byte limit ({limit})")
+            chunks.append(chunk)
+        r._content = b"".join(chunks)
+        return r
 
 
 def slug_for(channel: dict) -> str:
@@ -111,7 +115,9 @@ def fetch(channel: dict, checked: str, media_dir: Path | None, limit: int = 10) 
                      "grouped_message_ids": [grouped],
                      "sources": [{"title": "Публичный просмотр канала Telegram", "url": url, "date": checked[:10]}],
                      "source_url": url, "checked_at": checked,
-                     "media_status": "preview_saved" if photos else "no_public_media_preview"}
+                     "media_status": ("preview_saved" if photos else
+                                      "preview_download_failed" if media and media_dir is not None else
+                                      "no_public_media_preview")}
             collected.append(posts)
         return row, collected
     except Exception as exc:

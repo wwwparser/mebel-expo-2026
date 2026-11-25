@@ -79,5 +79,55 @@
     "site_responses": 214,
     "linked_pages": 299,
     "linked_page_responses": 288
+  },
+  "exhibitor_archive": {
+    "checked_at": "2026-11-26",
+    "editions": [
+      {
+        "year": 2023,
+        "entries": 1064,
+        "detail_cards": 1064,
+        "source": "https://icatalog.expocentr.ru/ru/exhibitions/ac7d68d7-c129-11eb-80cc-a0d3c1fab97f/list",
+        "russia": 602,
+        "china": 366
+      },
+      {
+        "year": 2024,
+        "entries": 929,
+        "detail_cards": 929,
+        "source": "https://icatalog.expocentr.ru/ru/exhibitions/348532cd-e716-11ec-80cd-a0d3c1fab97f/list",
+        "russia": 527,
+        "china": 329
+      },
+      {
+        "year": 2025,
+        "entries": 742,
+        "detail_cards": 742,
+        "source": "https://icatalog.expocentr.ru/ru/exhibitions/de590dc1-417d-11ee-80ce-a0d3c1fab97f/list",
+        "russia": 429,
+        "china": 274
+      },
+      {
+        "year": 2026,
+        "entries": 478,
+        "detail_cards": 478,
+        "source": "https://icatalog.expocentr.ru/ru/exhibitions/f33d045c-98f8-11ef-80ce-a0d3c1fab97f/list",
+        "russia": 262,
+        "china": 190
+      }
+    ],
+    "companies": 2407,
+    "supplemental_current": 5,
+    "sites_attempted": 1741,
+    "sites_checked": 1318,
+    "companies_with_website": 1956,
+    "companies_with_email_or_phone": 2306,
+    "channels": 261,
+    "new_channels": 198,
+    "refreshed_channels": 2,
+    "new_posts": 1561,
+    "archive_posts_with_preview": 1381,
+    "russia_companies": 1285,
+    "china_companies": 927
   }
 }

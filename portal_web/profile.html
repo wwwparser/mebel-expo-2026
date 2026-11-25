@@ -1,5 +1,9 @@
 {% extends 'base.html' %}{% import 'macros.html' as m %}{% block body %}<p class="crumbs small"><a href="{{ prefix }}{{ 'catalog.html' if profile_type=='participants' else 'people.html' }}">← {{ labels[profile_type] }}</a></p><header class="phead">{% if item.image_view %}<img class="avatar company-logo" src="{{ '' if item.image_view.startswith('http') else prefix }}{{ item.image_view }}" alt="{{ item.name }}">{% endif %}<div><p class="kicker">{{ config.brand_name }}{% if item.country %} · {{ item.country }}{% endif %}{% for s in item.stands %} · Стенд {{ s }}{% endfor %}</p><h1>{{ item.name }}</h1>{% if item.role %}<p class="lead">{{ item.role }}</p>{% endif %}{% if item.get('checked_at') %}<p class="muted small">Дата среза карточки: {{ item.checked_at|date_text }}</p>{% endif %}</div></header>
 {% if 'map' in enabled and item.stands %}<p><a class="chip scheme-link" href="{{ prefix }}map.html">Посмотреть официальную схему →</a></p>{% endif %}
+{% if profile_type=='participants' and archive_by_profile and item.id in archive_by_profile %}
+{% set history=archive_by_profile[item.id] %}
+<p><a class="chip" href="{{ prefix }}catalog.html#{{ history.id }}">Годы участия · {{ history.years|join(' / ') }} →</a></p>
+{% endif %}
 {% if profile_type=='participants' and 'services' in enabled and service_links.get(item.id) %}
 <div class="links">{% for service in service_links[item.id] %}<a class="chip" href="{{ prefix }}services.html#{{ service.id }}">{{ labels.services }} · {{ service.title }} →</a>{% endfor %}</div>
 {% endif %}

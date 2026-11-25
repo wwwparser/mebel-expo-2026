@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% import 'archive-controls.html' as a %}
+{% block page_styles %}<link rel="stylesheet" href="{{ prefix }}portal-assets/exhibitor-archive.css?v={{ archive_css_version }}">{% endblock %}
+{% block body %}
+<header class="edition-head archive-head">
+  <p class="kicker">Мебель · Каталоги 2023–2026</p>
+  <h1>Telegram-каналы участников</h1>
+  <p>{{ directory|length }} каналов с подтверждённой связью с участниками. Годы обозначают участие компании в выставке.</p>
+</header>
+{{ a.navigation(active) }}
+<p><a class="btn" href="{{ prefix }}feed.html">Читать общую ленту →</a></p>
+<section class="filter-scope archive-directory" data-limit="24">
+  <div class="filters archive-filters">
+    <input type="search" aria-label="Поиск канала" placeholder="Компания, название или @канал">
+    {{ a.years(archive_summary.editions) }}
+    <select data-field="preview" aria-label="Доступность"><option value="">Все каналы</option><option value="public_preview">С публичными постами</option><option value="channel_no_public_posts">Без публичного превью</option></select>
+    <button type="button" class="reset">Сбросить</button>
+  </div>
+  <p class="result-count small muted" aria-live="polite">{{ directory|length }} каналов</p>
+  <div class="archive-grid">
+  {% for channel in directory %}
+    <article class="card archive-company filter-item" data-years="{{ channel.years|join(' | ') }}" data-preview="{{ channel.status }}"
+             data-search="{{ [channel.title,channel.handle,'@'+channel.handle,channel.exhibitors|map(attribute='name')|join(' ')]|join(' ') }}">
+      <div class="archive-company-head">
+        <p class="small muted">{{ channel.years|join(' · ') }}</p>
+        <h2><a href="{{ channel.url }}">{{ channel.title }}</a></h2>
+        <p><a href="{{ channel.url }}">@{{ channel.handle }} ↗</a></p>
+      </div>
+      <ul class="archive-channel-sources">
+        {% for link in channel.companies %}
+          {% set company=channel.exhibitors[loop.index0] %}
+          <li><a href="{{ prefix }}catalog.html#{{ link.id }}">{{ company.name }}</a> <a class="small" href="{{ link.source }}">Источник ↗</a></li>
+        {% endfor %}
+      </ul>
+      {% if channel.status=='public_preview' %}<p class="small"><a href="{{ prefix }}feed.html?channel={{ channel.handle }}">Посты канала в ленте →</a></p>
+      {% else %}<p class="small muted">У канала нет доступного публичного превью.</p>{% endif %}
+    </article>
+  {% endfor %}
+  </div>
+  {{ a.pagination('Каналы по этим условиям не найдены.') }}
+</section>
+{% endblock %}

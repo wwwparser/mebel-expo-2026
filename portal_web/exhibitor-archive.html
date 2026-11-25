@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% import 'archive-controls.html' as a %}
+{% block page_styles %}<link rel="stylesheet" href="{{ prefix }}portal-assets/exhibitor-archive.css?v={{ archive_css_version }}">{% endblock %}
+{% block page_scripts %}<script src="{{ prefix }}portal-assets/exhibitor-archive.js?v={{ archive_js_version }}" defer></script>{% endblock %}
+{% block body %}
+<header class="edition-head archive-head">
+  <p class="kicker">Мебель · Каталоги 2023–2026</p>
+  <h1>{{ heading }}</h1>
+  <p>Найдите компанию и посмотрите годы участия, стенды, сайты, контакты и Telegram.</p>
+</header>
+{{ a.navigation(active) }}
+<section class="filter-scope archive-directory" data-limit="24">
+  <div class="filters archive-filters">
+    <input type="search" aria-label="Поиск участников" placeholder="Компания, город или сайт">
+    {{ a.years(archive_summary.editions) }}
+    {% if country_options %}<select data-field="country" aria-label="Страна"><option value="">Все страны</option>
+      {% for country in country_options %}<option>{{ country }}</option>{% endfor %}
+    </select>{% endif %}
+    <select data-field="contacts" aria-label="Контакты"><option value="">Все карточки</option><option>Есть сайт</option><option>Есть телефон или email</option><option>Есть Telegram</option></select>
+    <button class="reset" type="button">Сбросить</button>
+  </div>
+  <div class="archive-meta">
+    <p class="result-count small muted" aria-live="polite">{{ directory|length }} компаний</p>
+    <details class="source-note">
+      <summary>Официальные каталоги и контакты</summary>
+      <ul>{% for edition in archive_summary.editions %}<li><a href="{{ edition.source }}">{{ edition.year }} ↗</a> · {{ edition.entries }} записей в каталоге</li>{% endfor %}</ul>
+      {% if archive_summary.supplemental_current %}<p>Сохранены дополнительные записи из алфавитного списка 2026 года, для которых не нашлось совпадения в интернет-каталоге.</p>{% endif %}
+      <p>Контакты взяты из карточек участников и открытых источников. Год рядом с контактом показывает, к какому выпуску относится источник.</p>
+      {% if active=='participants-china.html' %}<p>Гонконг включён со своей отметкой из каталога.</p>{% endif %}
+    </details>
+  </div>
+  <div class="archive-grid">
+  {% for company in directory %}
+    {% set names=company.profiles|map(attribute='name')|join(' ') %}
+    {% set contact_types=[] %}
+    {% if company.websites %}{% set _=contact_types.append('Есть сайт') %}{% endif %}
+    {% if company.phones or company.emails %}{% set _=contact_types.append('Есть телефон или email') %}{% endif %}
+    {% if company.telegram %}{% set _=contact_types.append('Есть Telegram') %}{% endif %}
+    <article class="card archive-company filter-item" id="{{ company.id }}" data-years="{{ company.years|join(' | ') }}"
+       data-country="{{ company.country }}" data-contacts="{{ contact_types|join(' | ') }}"
+       data-search="{{ [names,company.city,company.country,company.websites|map(attribute='value')|join(' '),company.profiles|map(attribute='stands')|sum(start=[])|join(' '),company.telegram|map(attribute='handle')|join(' ')]|join(' ') }}">
+      <div class="archive-company-head">
+        <p class="small muted">{{ company.country }}{% if company.city %} · {{ company.city }}{% endif %}</p>
+        <h2>{% if company.profile_id %}<a href="{{ prefix }}participants/{{ company.profile_id }}.html">{{ company.name }}</a>{% else %}{{ company.name }}{% endif %}</h2>
+      </div>
+      <ul class="archive-editions" aria-label="Участие по годам">
+      {% for edition in company.profiles %}
+        <li><a href="{{ edition.source }}" title="Карточка в официальном каталоге">{{ edition.year }}{% if edition.stands %} · {{ edition.stands|join(', ') }}{% endif %}</a></li>
+      {% endfor %}
+      </ul>
+      {% if company.websites or company.phones or company.emails or company.telegram %}
+      <dl class="archive-contacts">
+        {% for label,values in [('Сайт',company.websites),('Телефон',company.phones),('Email',company.emails)] if values %}
+        <div><dt>{{ label }}</dt><dd><a href="{{ values[0].url }}">{{ values[0].value }}</a> <small>{{ values[0].year }}</small></dd></div>
+        {% endfor %}
+        {% if company.telegram %}<div><dt>Telegram</dt><dd>{% for channel in company.telegram %}<a href="{{ channel.url }}">@{{ channel.handle }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</dd></div>{% endif %}
+      </dl>
+      {% else %}<p class="small muted">Контакты в карточке не указаны.</p>{% endif %}
+    </article>
+  {% endfor %}
+  </div>
+  {{ a.pagination('Компании по этим условиям не найдены.') }}
+</section>
+{% endblock %}

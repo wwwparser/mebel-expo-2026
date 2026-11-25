@@ -278,6 +278,11 @@ def build(root=ROOT, output_override=None):
         raise ValueError('Output directory overlaps project source')
 
     rows = {name: load_rows(root, name) for name in MODULES if name != 'map'}
+    archive = read_json(root / 'data/portal/exhibitor_archive.json', {}) if config.get('exhibitor_archive') else {}
+    archive_posts = load_rows(root, 'archive_posts') if archive and 'posts' in selected else []
+    if {item['id'] for item in archive_posts} & {item['id'] for item in rows['posts']}:
+        raise ValueError('Archived Telegram post duplicates a current one')
+    rows['posts'].extend(archive_posts)
     if 'novelties' in selected:
         launches = load_rows(root, 'website_launches')
         superseded = {item['supersedes'] for item in launches if item.get('supersedes')}
@@ -336,6 +341,18 @@ def build(root=ROOT, output_override=None):
 
     channels = load_rows(root, 'channels') if rows['posts'] else []
     channel_map = {c['id']: c for c in channels}
+    archive_companies = {row['id']: row for row in archive.get('companies', [])}
+    archive_channel_map = {c['id']: c for c in archive.get('channels', [])}
+    for channel in archive_channel_map.values():
+        if set(c['id'] for c in channel['companies']) - archive_companies.keys():
+            raise ValueError(f'Unknown archived exhibitor in channel {channel["id"]}')
+        channel['exhibitors'] = [archive_companies[c['id']] for c in channel['companies']]
+        channel['years'] = sorted({year for c in channel['exhibitors'] for year in c['years']}, reverse=True)
+        if channel['id'] not in channel_map and 'posts' in active:
+            channels.append(channel)
+            channel_map[channel['id']] = channel
+        elif channel['id'] in channel_map:
+            channel_map[channel['id']]['status'] = channel['status']
     for channel in channels:
         if not safe_url(channel.get('url')) or not channel.get('title'):
             raise ValueError(f'Invalid channel {channel["id"]}')
@@ -357,6 +374,11 @@ def build(root=ROOT, output_override=None):
         date_value(post.get('published_at'), tz)
         channel = channel_map[post['channel_id']]
         post['channel'] = channel
+        if archive:
+            post['handle'] = urlsplit(channel['url']).path.rstrip('/').rsplit('/',1)[-1].casefold()
+        archive_channel = archive_channel_map.get(channel['id'], {})
+        post['exhibitors'] = archive_channel.get('exhibitors', [])
+        post['edition_years'] = archive_channel.get('years', [start.year] if channel.get('participant_ids') else [])
         input_hash = analysis_hash(config, post)
         post['participant_ids'] = list(dict.fromkeys(post.get('participant_ids', []) + channel.get('participant_ids', [])))
         post['people_ids'] = list(dict.fromkeys(post.get('people_ids', []) + channel.get('people_ids', [])))
@@ -374,7 +396,8 @@ def build(root=ROOT, output_override=None):
             if a.get('checked_at'):
                 date_value(a['checked_at'], tz)
         post['analysis_label'] = ' · '.join(v for v in (kind_labels[a['classification']], relevance_labels[a['relevance']]) if v) if current and a.get('classification') != 'other' else ''
-        post['analysis_status'] = 'Разбор относится к этому тексту и выпуску' if current else 'Разбор ожидается'
+        post['analysis_status'] = ('Разбор относится к этому тексту и выпуску' if current else
+                                   '' if channel['id'].startswith('archive-tg-') else 'Разбор ожидается')
         post['is_current_expo'] = bool(current and a.get('relevance') == 'current_expo')
     rows['posts'].sort(key=lambda p: p.get('published_at') or '', reverse=True)
 
@@ -432,6 +455,8 @@ def build(root=ROOT, output_override=None):
     labels = {key: value[1] for key, value in MODULES.items()}
     labels.update(config.get('labels', {}))
     nav = [('index.html', 'Главная')] + [(MODULES[k][0], labels[k]) for k in MODULES if k in active]
+    if archive:
+        nav.append(('telegram-channels.html', 'Telegram-каналы'))
     visit_plan = load_rows(root, 'visit_plan') if config.get('visit_plan') else []
     if visit_plan:
         nav.insert(1, ('visit-plan.html', 'Маршрут'))
@@ -509,6 +534,12 @@ def build(root=ROOT, output_override=None):
                    giveaway_groups=list(giveaways.items()), rows=rows, feed_count=feed_count,
                    style_version=digest(style)[:16], script_version=digest(script)[:16],
                    dates_label=config.get('dates_label') or f'{start:%d.%m.%Y} — {end:%d.%m.%Y}')
+    context['archive_summary'] = archive.get('summary', {})
+    if archive:
+        context['archive_by_profile'] = {c['profile_id']: c for c in archive_companies.values() if c.get('profile_id')}
+        feed_channels = {post['handle']: post['channel']['title'] for post in rows['posts']}
+        context['feed_channels'] = [{'handle': handle, 'title': title}
+            for handle, title in sorted(feed_channels.items(), key=lambda pair: pair[1].casefold())]
     context.update(speaker_items=speaker_items, business_guides=business_guides, telegram_refresh=telegram_refresh,
                    business_groups=sorted({g['group'] for g in business_guides}),
                    opportunity_count=len(opportunity_guides),
@@ -540,6 +571,12 @@ def build(root=ROOT, output_override=None):
         context['event_schema']['url'] = config['official_url']
     favicon = b'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#223b32"/><text x="32" y="45" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="42" fill="#fffdf9">M</text></svg>'
     generated = {'portal-assets/style.css': style, 'portal-assets/portal.js': script, 'favicon.svg': favicon}
+    if archive:
+        for ext in ('css', 'js'):
+            name = f'exhibitor-archive.{ext}'
+            payload = (root / 'portal_web' / name).read_text(encoding='utf-8').encode('utf-8')
+            generated[f'portal-assets/{name}'] = payload
+            context[f'archive_{ext}_version'] = digest(payload)[:16]
     if visit_plan:
         route_styles = (root / 'portal_web/visit-plan.css').read_text(encoding='utf-8').encode('utf-8')
         generated['portal-assets/visit-plan.css'] = route_styles
@@ -577,10 +614,21 @@ def build(root=ROOT, output_override=None):
     if visit_plan:
         render('visit-plan.html', 'visit-plan.html', 'Маршрут посещения', sections=visit_plan,
                description='План посещения выставки. Стенды IT и маркетинга, встречи с фабриками и расписание обхода.')
-    render('catalog.html', 'catalog.html', labels['participants'],
+    render('catalog-2026.html' if archive else 'catalog.html', 'catalog.html', labels['participants'],
            countries=sorted({p['country'] for p in participants if p['country']}),
            categories=sorted({v for p in participants for v in p['categories']}),
            halls=sorted({v for p in participants for v in p['halls']}))
+    if archive:
+        for path, title, countries in (
+            ('catalog.html', 'Участники выставок 2023–2026', ()),
+            ('participants-russia.html', 'Российские участники', ('Россия',)),
+            ('participants-china.html', 'Китайские участники', ('Китай', 'Гонконг, Китай')),
+        ):
+            directory = [c for c in archive_companies.values() if not countries or c['country'] in countries]
+            render(path, 'exhibitor-archive.html', title, heading=title, directory=directory,
+                   country_options=sorted({c['country'] for c in directory}) if not countries else [])
+        render('telegram-channels.html', 'telegram-directory.html', 'Telegram-каналы участников',
+               directory=archive.get('channels', []))
     for name, values in [('participants', participants), ('people', people)]:
         for item in values:
             related = [p for p in rows['posts'] if item['id'] in p.get('participant_ids' if name == 'participants' else 'people_ids', [])]

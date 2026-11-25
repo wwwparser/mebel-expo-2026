@@ -8,6 +8,11 @@ document.querySelectorAll('.filter-scope').forEach(scope=>{
  const cards=[...scope.querySelectorAll('.filter-item')], search=scope.querySelector('input[type=search]'), selects=[...scope.querySelectorAll('select[data-field]')], more=scope.querySelector('.more'), count=scope.querySelector('.result-count'), empty=scope.querySelector('.empty');
  const step=Number(scope.dataset.limit)||24;let limit=step;
  const searchIndex = new Map(cards.map(card => [card, searchable(card.dataset.search || '')]));
+ const params=new URLSearchParams(location.search);
+ for(const select of selects){
+   const value=select.dataset.param && params.get(select.dataset.param);
+   if(value && [...select.options].some(option=>option.value===value))select.value=value;
+ }
  function update(reset=false){if(reset)limit=step;const q=searchable((search?.value||'').trim());let matches=0,shown=0;
  for(const card of cards){const ok=(!q||searchIndex.get(card).includes(q))&&selects.every(s=>!s.value||(card.dataset[s.dataset.field]||'').split(' | ').includes(s.value));const show=ok&&matches++<limit;card.hidden=!show;if(show)shown++;}
  if(count)count.textContent=`Найдено: ${matches}. Показано: ${shown}.`;if(more)more.hidden=matches<=limit;if(empty)empty.hidden=matches>0;}

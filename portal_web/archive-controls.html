@@ -1,0 +1,16 @@
+{% macro years(editions) %}
+<select data-field="years" aria-label="Год участия"><option value="">Все годы</option>
+{% for edition in editions|reverse %}<option>{{ edition.year }}</option>{% endfor %}
+</select>
+{% endmacro %}
+{% macro navigation(active) %}
+<nav class="newsnav" aria-label="Каталоги и каналы">
+  {% for href,title in [('catalog.html','Все страны'),('participants-russia.html','Россия'),('participants-china.html','Китай'),('telegram-channels.html','Telegram-каналы'),('catalog-2026.html','Залы 2026')] %}
+  <a href="{{ href }}"{% if active==href %} aria-current="page"{% endif %}>{{ title }}</a>
+  {% endfor %}
+</nav>
+{% endmacro %}
+{% macro pagination(empty) %}
+<p class="empty" hidden>{{ empty }} Проверьте запрос или сбросьте фильтры.</p>
+<button class="btn more" type="button" hidden>Показать ещё</button>
+{% endmacro %}
